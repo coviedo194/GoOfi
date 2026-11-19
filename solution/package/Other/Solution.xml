@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.26102.136" SolutionPackageVersion="9.2" languagecode="3082" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26102.136" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26102.00136">
+<ImportExportXml version="9.2.26103.165" SolutionPackageVersion="9.2" languagecode="3082" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26103.165" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26103.00165">
   <SolutionManifest>
     <UniqueName>OVIGIGOF</UniqueName>
     <LocalizedNames>
@@ -8,7 +8,7 @@
     <Descriptions>
       <Description description="&#xA;Publicador&#xA;Ovigi&#xA;Revisión&#xA;No&#xA;Descripción&#xA;OVIGIGOF — Coordina la presencialidad en la oficina entre compañeros remotos (eventos, avisos y oficinas). Repositorio: https://github.com/coviedo194/GoOfi Documentación: https://github.com/coviedo194/GoOfi/blob/master/README.md" languagecode="3082" />
     </Descriptions>
-    <Version>1.0.0.20</Version>
+    <Version>1.0.0.21</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>Ovigi</UniqueName>
@@ -107,8 +107,8 @@
         <Dependent type="80" schemaName="ovg_GoOfiAdmin" displayName="GoOfi - Admin" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.27)" id.uniquename="AppChannel">
-          <package appName="PowerAppsAppFramework Package" version="1.0.0.27">PowerAppsAppFramework_Anchor (1.0.0.27)</package>
+        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.28)" id.uniquename="AppChannel">
+          <package appName="PowerAppsAppFramework Package" version="1.0.0.30">PowerAppsAppFramework_Anchor (1.0.0.30)</package>
         </Required>
         <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=ovg_GoOfiAdmin,settingdefinitionid.uniquename=AppChannel" id.parentappmoduleid.uniquename="ovg_GoOfiAdmin" id.settingdefinitionid.uniquename="AppChannel" />
       </MissingDependency>

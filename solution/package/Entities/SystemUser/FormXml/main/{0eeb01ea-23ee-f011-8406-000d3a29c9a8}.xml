@@ -72,7 +72,7 @@
                     <row>
                       <cell id="{78796de8-7d0e-4601-a6b0-9905354a61d9}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="Días para avisos automáticos en GOF" languagecode="3082" />
+                          <label description="Asistencia automática en GOF" languagecode="3082" />
                         </labels>
                         <control id="ovg_diasparaavisosautomaticosengof" classid="{4AA28AB7-9C13-4F57-A73D-AD894D048B5F}" datafieldname="ovg_diasparaavisosautomaticosengof" disabled="false" />
                       </cell>

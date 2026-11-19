@@ -5,24 +5,6 @@
  */
 
 export const dataSourcesInfo = {
-  "whoami": {
-    "tableId": "",
-    "version": "",
-    "primaryKey": "",
-    "dataSourceType": "Dataverse",
-    "apis": {
-      "WhoAmI": {
-        "path": "/api/data/v9.2/WhoAmI",
-        "method": "GET",
-        "parameters": [],
-        "responseInfo": {
-          "200": {
-            "type": "object"
-          }
-        }
-      }
-    }
-  },
   "ovg_asistentedeeventoparagofs": {
     "tableId": "",
     "version": "",

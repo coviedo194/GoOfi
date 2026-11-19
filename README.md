@@ -15,7 +15,7 @@ Técnicamente es una **Power Apps Code App** (React + TypeScript + Vite) con su 
 - 🙋 **Apuntarte a eventos**: ves quién organiza y la lista de asistentes, y te apuntas o desapuntas con un clic.
 - ✏️ **Gestionar tus eventos**: solo quien organiza un evento puede editarlo o eliminarlo.
 - 🏢 **Elegir tu oficina**: todo (avisos y eventos) se filtra por la oficina que tengas configurada.
-- 🔁 **Avisos automáticos por días fijos**: indica qué días sueles ir (p. ej. martes y jueves) y GoOfi creará tus avisos solo.
+- 🔁 **Asistencia automática**: indica qué días sueles ir a la oficina (p. ej. martes y jueves) y GoOfi te apuntará automáticamente. Estos días no determinan cuándo recibes notificaciones.
 - 🌗 **Tema claro, oscuro o del sistema**, a tu gusto.
 
 ### Para quienes tienen llave y administradores (app GoOfi)
@@ -50,7 +50,7 @@ Este repo tiene dos partes; entra en la que necesites:
 
 ### 👩‍💻 Quiero entender o mejorar el código
 
-👉 Ve a [`code-app/`](./code-app/) y sigue su README: arrancar en local (`npm install`, `npm run dev`), desplegar con `npm run build-push` y regenerar la solución con `solution/scripts/regenerate-solution.ps1`.
+👉 Ve a [`code-app/`](./code-app/) y sigue su README: arrancar en local (`npm install`, `npm run dev`) y compilar, desplegar y regenerar la solución con `npm run build-push-regeneratesolution`, todo desde `code-app/`.
 
 ## 🤝 Cómo colaborar
 

@@ -43,20 +43,20 @@ Este es el **único** archivo de instrucciones del repositorio (válido para cua
 
 ## Sincronización con Dataverse (regla para agentes)
 
-`solution/package/` **SOLO se actualiza con `solution/scripts/regenerate-solution.ps1`**. Nunca se edita a mano (ver el aviso de solo lectura más abajo).
+`solution/package/` **SOLO se actualiza con `solution/scripts/regenerate-solution.ps1`**. Cuando el usuario pide un cambio en la solución (tablas, columnas, formularios, flujos, roles…), el agente lo hace **en Dataverse** mediante pac, Web API o MCP, y después se regenera el snapshot. No se edita el XML/JSON de `solution/package/` para empaquetarlo e importarlo (ver el aviso de solo lectura más abajo).
 
 - Cambios hechos por el usuario en el portal Maker → el usuario ejecuta el script.
-- Cambios hechos por un agente contra Dataverse (pac/API/MCP, roles, tablas, flujos…) → **avisar al usuario de que hay cambios pendientes** y recomendarle `pwsh solution/scripts/regenerate-solution.ps1`.
+- Cambios hechos por un agente contra Dataverse (pac/API/MCP, roles, tablas, flujos…) → **avisar al usuario de que hay cambios pendientes**. Si también hay cambios de la app pendientes de desplegar, recomendar `npm run build-push-regeneratesolution` desde `code-app/`; si solo falta actualizar el snapshot, recomendar `pwsh solution/scripts/regenerate-solution.ps1` desde la raíz.
 
 ## Flujo de trabajo y recordatorios (solo recordar, no ejecutar sin que lo pida)
 
-1. **Tras cambios en `code-app/`**: recordar desplegar con `npm run build-push` (desde `code-app/`) para que el entorno, y por tanto la solución, tenga la última versión de la app.
-2. **Tras cambios en Dataverse o tras desplegar**: recordar ejecutar `regenerate-solution.ps1` para versionar la solución en `solution/package/`.
-3. **Si el usuario pide o se va a hacer un `git commit`**: antes, recordar los pasos 1 y 2 (build-push → regenerate-solution → commit).
+1. **Tras cambios en `code-app/`**: recomendar `npm run build-push-regeneratesolution` desde `code-app/` para compilar, desplegar y actualizar `solution/package/` con un solo comando. Este es también el recordatorio predeterminado cuando hay cambios tanto en la app como en Dataverse; no proponer los dos comandos separados para el ciclo completo.
+2. **Tras cambios solo en Dataverse o tras un despliegue ya realizado sin regeneración**: recordar ejecutar `pwsh solution/scripts/regenerate-solution.ps1` desde la raíz. No volver a desplegar ni incrementar la versión si solo falta regenerar.
+3. **Si el usuario pide o se va a hacer un `git commit`**: antes, recordar el ciclo pendiente según los puntos anteriores (`build-push-regeneratesolution` → commit cuando hay cambios de la app).
 4. **Al empezar una sesión**: mirar `git log -1 --format=%cd`. Si pasó **una semana o más** desde el último commit (y hay cambios sin commitear), recordárselo en el chat **una sola vez por sesión**.
 5. Nunca hacer commit ni push sin que el usuario lo pida.
 
-Cuando el usuario autoriza el ciclo completo de compilación, despliegue y regeneración, usar preferentemente el script existente desde `code-app/`:
+Tanto al recomendar el ciclo completo de compilación, despliegue y regeneración como al ejecutarlo con autorización del usuario, usar el script existente desde `code-app/`:
 
 ```bash
 npm run build-push-regeneratesolution
@@ -324,11 +324,14 @@ Su compañero es `solution/scripts/pack-solution.ps1`, que incrementa el cuarto 
 > en la siguiente ejecución de `regenerate-solution.ps1`.**
 >
 > Reglas:
-> - ❌ **NO** crear, modificar ni borrar archivos bajo `solution/package/`
->   (incluyendo `Entities/`, `CanvasApps/`, `Workflows/`, `WebResources/`,
->   `Other/`, `Roles/`, etc.).
-> - ❌ **NO** añadir esos cambios a un commit. Si aparecen en `git status`,
->   revertirlos con `git checkout -- solution/package/`.
+> - ❌ **NO** usar `solution/package/` como vía para cambiar la solución:
+>   no editar `Entities/`, `CanvasApps/`, `Workflows/`, `WebResources/`,
+>   `Other/`, `Roles/`, etc. para luego empaquetar e importar. Los cambios se
+>   hacen en Dataverse (pac, Web API o MCP) y se traen con el script.
+> - ✅ Los cambios que produce `regenerate-solution.ps1` (exportación y limpieza
+>   de IDs y correos en los flujos) son legítimos y se commitean; no revertirlos.
+>   Solo revertir con `git checkout -- solution/package/` lo que un agente haya
+>   editado a mano por error.
 > - ✅ **SÍ** leer esos archivos para entender el modelo de datos, los flujos,
 >   o la configuración de la solución.
 > - ✅ **SÍ** regenerar la carpeta ejecutando `pwsh solution/scripts/regenerate-solution.ps1`

@@ -52,6 +52,7 @@
           "x-ms-dataverse-attribute": "accessmodename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "AccessModeName",
+          "x-ms-dataverse-attribute-of": "accessmode",
           "x-ms-read-only": true
         },
         "activedirectoryguid": {
@@ -96,6 +97,7 @@
           "x-ms-dataverse-attribute": "address1_addresstypecodename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "Address1_AddressTypeCodeName",
+          "x-ms-dataverse-attribute-of": "address1_addresstypecode",
           "x-ms-read-only": true
         },
         "address1_city": {
@@ -227,6 +229,7 @@
           "x-ms-dataverse-attribute": "address1_shippingmethodcodename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "Address1_ShippingMethodCodeName",
+          "x-ms-dataverse-attribute-of": "address1_shippingmethodcode",
           "x-ms-read-only": true
         },
         "address1_stateorprovince": {
@@ -310,6 +313,7 @@
           "x-ms-dataverse-attribute": "address2_addresstypecodename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "Address2_AddressTypeCodeName",
+          "x-ms-dataverse-attribute-of": "address2_addresstypecode",
           "x-ms-read-only": true
         },
         "address2_city": {
@@ -441,6 +445,7 @@
           "x-ms-dataverse-attribute": "address2_shippingmethodcodename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "Address2_ShippingMethodCodeName",
+          "x-ms-dataverse-attribute-of": "address2_shippingmethodcode",
           "x-ms-read-only": true
         },
         "address2_stateorprovince": {
@@ -511,8 +516,7 @@
           "title": "Id. de objeto de Azure AD",
           "x-ms-dataverse-attribute": "azureactivedirectoryobjectid",
           "x-ms-dataverse-type": "UniqueidentifierType",
-          "x-ms-schema-name": "AzureActiveDirectoryObjectId",
-          "x-ms-read-only": true
+          "x-ms-schema-name": "AzureActiveDirectoryObjectId"
         },
         "azuredeletedon": {
           "type": "string",
@@ -555,6 +559,7 @@
           "x-ms-dataverse-attribute": "azurestatename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "azurestateName",
+          "x-ms-dataverse-attribute-of": "azurestate",
           "x-ms-read-only": true
         },
         "businessunitid": {
@@ -563,6 +568,9 @@
           "x-ms-dataverse-attribute": "businessunitid",
           "x-ms-dataverse-type": "LookupType",
           "x-ms-schema-name": "BusinessUnitId",
+          "x-ms-dataverse-navigation-properties": [
+            "businessunitid"
+          ],
           "required": true
         },
         "businessunitidname": {
@@ -571,6 +579,7 @@
           "x-ms-dataverse-attribute": "businessunitidname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "BusinessUnitIdName",
+          "x-ms-dataverse-attribute-of": "businessunitid",
           "x-ms-read-only": true,
           "required": true,
           "maxLength": 100
@@ -580,7 +589,10 @@
           "title": "Calendario",
           "x-ms-dataverse-attribute": "calendarid",
           "x-ms-dataverse-type": "LookupType",
-          "x-ms-schema-name": "CalendarId"
+          "x-ms-schema-name": "CalendarId",
+          "x-ms-dataverse-navigation-properties": [
+            "calendarid"
+          ]
         },
         "caltype": {
           "type": "string",
@@ -645,6 +657,7 @@
           "x-ms-dataverse-attribute": "caltypename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "CALTypeName",
+          "x-ms-dataverse-attribute-of": "caltype",
           "x-ms-read-only": true
         },
         "createdby": {
@@ -653,6 +666,9 @@
           "x-ms-dataverse-attribute": "createdby",
           "x-ms-dataverse-type": "LookupType",
           "x-ms-schema-name": "CreatedBy",
+          "x-ms-dataverse-navigation-properties": [
+            "createdby"
+          ],
           "x-ms-read-only": true
         },
         "createdbyname": {
@@ -661,6 +677,7 @@
           "x-ms-dataverse-attribute": "createdbyname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "CreatedByName",
+          "x-ms-dataverse-attribute-of": "createdby",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -670,6 +687,7 @@
           "x-ms-dataverse-attribute": "createdbyyominame",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "CreatedByYomiName",
+          "x-ms-dataverse-attribute-of": "createdby",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -687,6 +705,9 @@
           "x-ms-dataverse-attribute": "createdonbehalfby",
           "x-ms-dataverse-type": "LookupType",
           "x-ms-schema-name": "CreatedOnBehalfBy",
+          "x-ms-dataverse-navigation-properties": [
+            "createdonbehalfby"
+          ],
           "x-ms-read-only": true
         },
         "createdonbehalfbyname": {
@@ -695,6 +716,7 @@
           "x-ms-dataverse-attribute": "createdonbehalfbyname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "CreatedOnBehalfByName",
+          "x-ms-dataverse-attribute-of": "createdonbehalfby",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -704,6 +726,7 @@
           "x-ms-dataverse-attribute": "createdonbehalfbyyominame",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "CreatedOnBehalfByYomiName",
+          "x-ms-dataverse-attribute-of": "createdonbehalfby",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -737,6 +760,9 @@
           "x-ms-dataverse-attribute": "defaultmailbox",
           "x-ms-dataverse-type": "LookupType",
           "x-ms-schema-name": "DefaultMailbox",
+          "x-ms-dataverse-navigation-properties": [
+            "defaultmailbox"
+          ],
           "x-ms-read-only": true
         },
         "defaultmailboxname": {
@@ -745,6 +771,7 @@
           "x-ms-dataverse-attribute": "defaultmailboxname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "DefaultMailboxName",
+          "x-ms-dataverse-attribute-of": "defaultmailbox",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -789,6 +816,7 @@
           "x-ms-dataverse-attribute": "deletedstatename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "deletedstateName",
+          "x-ms-dataverse-attribute-of": "deletedstate",
           "x-ms-read-only": true
         },
         "disabledreason": {
@@ -829,6 +857,7 @@
           "x-ms-dataverse-attribute": "displayinserviceviewsname",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "DisplayInServiceViewsName",
+          "x-ms-dataverse-attribute-of": "displayinserviceviews",
           "x-ms-read-only": true
         },
         "domainname": {
@@ -876,6 +905,7 @@
           "x-ms-dataverse-attribute": "emailrouteraccessapprovalname",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "EmailRouterAccessApprovalName",
+          "x-ms-dataverse-attribute-of": "emailrouteraccessapproval",
           "x-ms-read-only": true
         },
         "employeeid": {
@@ -891,7 +921,8 @@
           "title": "Imagen de la entidad",
           "x-ms-dataverse-attribute": "entityimage",
           "x-ms-dataverse-type": "ImageType",
-          "x-ms-schema-name": "EntityImage"
+          "x-ms-schema-name": "EntityImage",
+          "x-ms-dataverse-attribute-of": "entityimageid"
         },
         "entityimage_timestamp": {
           "type": "string",
@@ -899,6 +930,7 @@
           "x-ms-dataverse-attribute": "entityimage_timestamp",
           "x-ms-dataverse-type": "BigIntType",
           "x-ms-schema-name": "EntityImage_Timestamp",
+          "x-ms-dataverse-attribute-of": "entityimageid",
           "x-ms-read-only": true
         },
         "entityimage_url": {
@@ -907,6 +939,7 @@
           "x-ms-dataverse-attribute": "entityimage_url",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "EntityImage_URL",
+          "x-ms-dataverse-attribute-of": "entityimageid",
           "x-ms-read-only": true,
           "maxLength": 200
         },
@@ -1013,6 +1046,7 @@
           "x-ms-dataverse-attribute": "incomingemaildeliverymethodname",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "IncomingEmailDeliveryMethodName",
+          "x-ms-dataverse-attribute-of": "incomingemaildeliverymethod",
           "x-ms-read-only": true
         },
         "internalemailaddress": {
@@ -1069,6 +1103,7 @@
           "x-ms-dataverse-attribute": "invitestatuscodename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "InviteStatusCodeName",
+          "x-ms-dataverse-attribute-of": "invitestatuscode",
           "x-ms-read-only": true
         },
         "isactivedirectoryuser": {
@@ -1124,6 +1159,7 @@
           "x-ms-dataverse-attribute": "isallowedbyipfirewallname",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "isallowedbyipfirewallName",
+          "x-ms-dataverse-attribute-of": "isallowedbyipfirewall",
           "x-ms-read-only": true
         },
         "isdisabled": {
@@ -1155,6 +1191,7 @@
           "x-ms-dataverse-attribute": "isdisabledname",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "IsDisabledName",
+          "x-ms-dataverse-attribute-of": "isdisabled",
           "x-ms-read-only": true
         },
         "isemailaddressapprovedbyo365admin": {
@@ -1212,6 +1249,7 @@
           "x-ms-dataverse-attribute": "isintegrationusername",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "IsIntegrationUserName",
+          "x-ms-dataverse-attribute-of": "isintegrationuser",
           "x-ms-read-only": true
         },
         "islicensed": {
@@ -1243,6 +1281,7 @@
           "x-ms-dataverse-attribute": "islicensedname",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "IsLicensedName",
+          "x-ms-dataverse-attribute-of": "islicensed",
           "x-ms-read-only": true
         },
         "issyncwithdirectory": {
@@ -1314,7 +1353,10 @@
           "title": "Perfil de Mobile Offline",
           "x-ms-dataverse-attribute": "mobileofflineprofileid",
           "x-ms-dataverse-type": "LookupType",
-          "x-ms-schema-name": "MobileOfflineProfileId"
+          "x-ms-schema-name": "MobileOfflineProfileId",
+          "x-ms-dataverse-navigation-properties": [
+            "mobileofflineprofileid"
+          ]
         },
         "mobileofflineprofileidname": {
           "type": "string",
@@ -1322,6 +1364,7 @@
           "x-ms-dataverse-attribute": "mobileofflineprofileidname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "MobileOfflineProfileIdName",
+          "x-ms-dataverse-attribute-of": "mobileofflineprofileid",
           "maxLength": 100
         },
         "mobilephone": {
@@ -1338,6 +1381,9 @@
           "x-ms-dataverse-attribute": "modifiedby",
           "x-ms-dataverse-type": "LookupType",
           "x-ms-schema-name": "ModifiedBy",
+          "x-ms-dataverse-navigation-properties": [
+            "modifiedby"
+          ],
           "x-ms-read-only": true
         },
         "modifiedbyname": {
@@ -1346,6 +1392,7 @@
           "x-ms-dataverse-attribute": "modifiedbyname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "ModifiedByName",
+          "x-ms-dataverse-attribute-of": "modifiedby",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -1355,6 +1402,7 @@
           "x-ms-dataverse-attribute": "modifiedbyyominame",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "ModifiedByYomiName",
+          "x-ms-dataverse-attribute-of": "modifiedby",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -1372,6 +1420,9 @@
           "x-ms-dataverse-attribute": "modifiedonbehalfby",
           "x-ms-dataverse-type": "LookupType",
           "x-ms-schema-name": "ModifiedOnBehalfBy",
+          "x-ms-dataverse-navigation-properties": [
+            "modifiedonbehalfby"
+          ],
           "x-ms-read-only": true
         },
         "modifiedonbehalfbyname": {
@@ -1380,6 +1431,7 @@
           "x-ms-dataverse-attribute": "modifiedonbehalfbyname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "ModifiedOnBehalfByName",
+          "x-ms-dataverse-attribute-of": "modifiedonbehalfby",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -1389,6 +1441,7 @@
           "x-ms-dataverse-attribute": "modifiedonbehalfbyyominame",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "ModifiedOnBehalfByYomiName",
+          "x-ms-dataverse-attribute-of": "modifiedonbehalfby",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -1415,6 +1468,7 @@
           "x-ms-dataverse-attribute": "organizationidname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "OrganizationIdName",
+          "x-ms-dataverse-attribute-of": "organizationid",
           "x-ms-read-only": true,
           "required": true,
           "maxLength": 100
@@ -1452,6 +1506,7 @@
           "x-ms-dataverse-attribute": "outgoingemaildeliverymethodname",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "OutgoingEmailDeliveryMethodName",
+          "x-ms-dataverse-attribute-of": "outgoingemaildeliverymethod",
           "x-ms-read-only": true
         },
         "overriddencreatedon": {
@@ -1499,6 +1554,7 @@
           "x-ms-dataverse-attribute": "ovg_diasparaavisosautomaticosengofname",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "ovg_diasparaavisosautomaticosengofName",
+          "x-ms-dataverse-attribute-of": "ovg_diasparaavisosautomaticosengof",
           "x-ms-read-only": true
         },
         "ovg_oficinaparagof": {
@@ -1506,7 +1562,10 @@
           "title": "Oficina para GOF",
           "x-ms-dataverse-attribute": "ovg_oficinaparagof",
           "x-ms-dataverse-type": "LookupType",
-          "x-ms-schema-name": "ovg_oficinaparagof"
+          "x-ms-schema-name": "ovg_oficinaparagof",
+          "x-ms-dataverse-navigation-properties": [
+            "ovg_oficinaparagof"
+          ]
         },
         "ovg_oficinaparagofname": {
           "type": "string",
@@ -1514,15 +1573,51 @@
           "x-ms-dataverse-attribute": "ovg_oficinaparagofname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "ovg_oficinaparagofName",
+          "x-ms-dataverse-attribute-of": "ovg_oficinaparagof",
           "x-ms-read-only": true,
           "maxLength": 300
+        },
+        "ovg_permisodeaperturadeoficina": {
+          "type": "string",
+          "title": "Permiso de apertura de oficina",
+          "x-ms-dataverse-attribute": "ovg_permisodeaperturadeoficina",
+          "x-ms-dataverse-type": "BooleanType",
+          "x-ms-schema-name": "ovg_permisodeaperturadeoficina",
+          "enum": [
+            "No",
+            "Sí"
+          ],
+          "x-ms-enum-values": [
+            0,
+            1
+          ],
+          "Color": [
+            null,
+            null
+          ],
+          "x-ms-optionsetmetadataid": "cfaea973-3793-f111-8076-3833c5c1ce81",
+          "x-ms-isGlobal": false,
+          "x-ms-optionsetdisplayname": "Permiso de apertura de oficina",
+          "x-ms-optionSetType": "Boolean"
+        },
+        "ovg_permisodeaperturadeoficinaname": {
+          "type": "string",
+          "title": "ovg_permisodeaperturadeoficinaname",
+          "x-ms-dataverse-attribute": "ovg_permisodeaperturadeoficinaname",
+          "x-ms-dataverse-type": "VirtualType",
+          "x-ms-schema-name": "ovg_permisodeaperturadeoficinaName",
+          "x-ms-dataverse-attribute-of": "ovg_permisodeaperturadeoficina",
+          "x-ms-read-only": true
         },
         "parentsystemuserid": {
           "type": "string",
           "title": "Administrador",
           "x-ms-dataverse-attribute": "parentsystemuserid",
           "x-ms-dataverse-type": "LookupType",
-          "x-ms-schema-name": "ParentSystemUserId"
+          "x-ms-schema-name": "ParentSystemUserId",
+          "x-ms-dataverse-navigation-properties": [
+            "parentsystemuserid"
+          ]
         },
         "parentsystemuseridname": {
           "type": "string",
@@ -1530,6 +1625,7 @@
           "x-ms-dataverse-attribute": "parentsystemuseridname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "ParentSystemUserIdName",
+          "x-ms-dataverse-attribute-of": "parentsystemuserid",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -1539,6 +1635,7 @@
           "x-ms-dataverse-attribute": "parentsystemuseridyominame",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "ParentSystemUserIdYomiName",
+          "x-ms-dataverse-attribute-of": "parentsystemuserid",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -1577,7 +1674,10 @@
           "title": "Posición",
           "x-ms-dataverse-attribute": "positionid",
           "x-ms-dataverse-type": "LookupType",
-          "x-ms-schema-name": "PositionId"
+          "x-ms-schema-name": "PositionId",
+          "x-ms-dataverse-navigation-properties": [
+            "positionid"
+          ]
         },
         "positionidname": {
           "type": "string",
@@ -1585,6 +1685,7 @@
           "x-ms-dataverse-attribute": "positionidname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "PositionIdName",
+          "x-ms-dataverse-attribute-of": "positionid",
           "x-ms-read-only": true,
           "maxLength": 100
         },
@@ -1617,6 +1718,7 @@
           "x-ms-dataverse-attribute": "preferredaddresscodename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "PreferredAddressCodeName",
+          "x-ms-dataverse-attribute-of": "preferredaddresscode",
           "x-ms-read-only": true
         },
         "preferredemailcode": {
@@ -1645,6 +1747,7 @@
           "x-ms-dataverse-attribute": "preferredemailcodename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "PreferredEmailCodeName",
+          "x-ms-dataverse-attribute-of": "preferredemailcode",
           "x-ms-read-only": true
         },
         "preferredphonecode": {
@@ -1682,6 +1785,7 @@
           "x-ms-dataverse-attribute": "preferredphonecodename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "PreferredPhoneCodeName",
+          "x-ms-dataverse-attribute-of": "preferredphonecode",
           "x-ms-read-only": true
         },
         "processid": {
@@ -1696,7 +1800,10 @@
           "title": "Cola predeterminada",
           "x-ms-dataverse-attribute": "queueid",
           "x-ms-dataverse-type": "LookupType",
-          "x-ms-schema-name": "QueueId"
+          "x-ms-schema-name": "QueueId",
+          "x-ms-dataverse-navigation-properties": [
+            "queueid"
+          ]
         },
         "queueidname": {
           "type": "string",
@@ -1704,6 +1811,7 @@
           "x-ms-dataverse-attribute": "queueidname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "QueueIdName",
+          "x-ms-dataverse-attribute-of": "queueid",
           "x-ms-read-only": true,
           "maxLength": 400
         },
@@ -1745,6 +1853,7 @@
           "x-ms-dataverse-attribute": "setupusername",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "SetupUserName",
+          "x-ms-dataverse-attribute-of": "setupuser",
           "x-ms-read-only": true
         },
         "sharepointemailaddress": {
@@ -1781,15 +1890,18 @@
             "Usuario de Entra",
             "Usuario de C2",
             "Usuario auxiliar suplantable",
-            "Agentic User"
+            "Usuario de agentes",
+            "NonLicensed"
           ],
           "x-ms-enum-values": [
             0,
             1,
             2,
-            3
+            3,
+            4
           ],
           "Color": [
+            null,
             null,
             null,
             null,
@@ -1806,6 +1918,7 @@
           "x-ms-dataverse-attribute": "systemmanagedusertypename",
           "x-ms-dataverse-type": "VirtualType",
           "x-ms-schema-name": "systemmanagedusertypeName",
+          "x-ms-dataverse-attribute-of": "systemmanagedusertype",
           "x-ms-read-only": true
         },
         "systemuserid": {
@@ -1823,7 +1936,10 @@
           "title": "Zona de ventas",
           "x-ms-dataverse-attribute": "territoryid",
           "x-ms-dataverse-type": "LookupType",
-          "x-ms-schema-name": "TerritoryId"
+          "x-ms-schema-name": "TerritoryId",
+          "x-ms-dataverse-navigation-properties": [
+            "territoryid"
+          ]
         },
         "territoryidname": {
           "type": "string",
@@ -1831,6 +1947,7 @@
           "x-ms-dataverse-attribute": "territoryidname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "TerritoryIdName",
+          "x-ms-dataverse-attribute-of": "territoryid",
           "x-ms-read-only": true,
           "required": true,
           "maxLength": 100
@@ -1855,7 +1972,10 @@
           "title": "Divisa",
           "x-ms-dataverse-attribute": "transactioncurrencyid",
           "x-ms-dataverse-type": "LookupType",
-          "x-ms-schema-name": "TransactionCurrencyId"
+          "x-ms-schema-name": "TransactionCurrencyId",
+          "x-ms-dataverse-navigation-properties": [
+            "transactioncurrencyid"
+          ]
         },
         "transactioncurrencyidname": {
           "type": "string",
@@ -1863,6 +1983,7 @@
           "x-ms-dataverse-attribute": "transactioncurrencyidname",
           "x-ms-dataverse-type": "StringType",
           "x-ms-schema-name": "TransactionCurrencyIdName",
+          "x-ms-dataverse-attribute-of": "transactioncurrencyid",
           "x-ms-read-only": true,
           "maxLength": 100
         },

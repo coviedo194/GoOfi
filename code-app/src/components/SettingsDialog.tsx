@@ -52,7 +52,7 @@ const NO_OFFICE_OPTION = '__no-office__';
  *
  * Permite modificar:
  * - Oficina: oficina a la que el usuario va (lookup en systemuser)
- * - Días para avisos automáticos: multiselect en systemuser
+ * - Asistencia automática: días de la semana en systemuser
  *
  * Persistencia: autoguarda al cambiar cada dropdown (sin botón "Guardar").
  * En caso de error se revierte
@@ -267,17 +267,17 @@ export function SettingsDialog({
             <div className="settings-row">
               <div className="settings-label-line">
                 <label htmlFor="settings-dias" className="settings-label">
-                  Días para avisos automáticos
+                  Asistencia automática
                 </label>
                 <Tooltip
-                  content="Es opcional. El flujo se ejecuta a las 03:00 en días laborables y crea avisos para las fechas de los próximos 7 días que coincidan con los días seleccionados (entre 1 y 7 días de antelación)."
+                  content="Selecciona los días de la semana en los que sueles ir a la oficina y GoOfi te apuntará automáticamente. No son los días en los que recibes notificaciones. Es opcional. El flujo se ejecuta a las 03:00 en días laborables y crea avisos para las fechas de los próximos 7 días que coincidan con los días seleccionados (entre 1 y 7 días de antelación)."
                   relationship="description"
                 >
                   <Button
                     appearance="subtle"
                     size="small"
                     icon={<QuestionCircleRegular />}
-                    aria-label="Información sobre los avisos automáticos"
+                    aria-label="Información sobre la asistencia automática"
                     className="settings-help-button"
                   />
                 </Tooltip>

@@ -75,21 +75,21 @@ la interfaz no sustituye los permisos de Dataverse sobre los datos.
 
 ## 🌐 Desplegar la Code App
 
-Para desplegar los cambios de la app en tu entorno:
-
-```bash
-npm run build-push
-```
-
-Antes de la primera ejecución, asegúrate de haber ejecutado `pac auth create` y de que el `environmentId` de `power.config.json` coincide con tu entorno.
-
-Para desplegar y actualizar después el snapshot de la solución con un solo comando:
+El comando recomendado para compilar, desplegar los cambios de la app y actualizar el snapshot de la solución se ejecuta desde `code-app/`:
 
 ```bash
 npm run build-push-regeneratesolution
 ```
 
-Comprueba que el perfil activo para el despliegue y el perfil `GOOFI_PAC_PROFILE`
+Antes de la primera ejecución, asegúrate de haber ejecutado `pac auth create` y de que el `environmentId` de `power.config.json` coincide con tu entorno.
+
+Si necesitas únicamente compilar y desplegar, sin regenerar la solución:
+
+```bash
+npm run build-push
+```
+
+Para el ciclo completo, comprueba que el perfil activo para el despliegue y el perfil `GOOFI_PAC_PROFILE`
 para la exportación apuntan al mismo entorno que `power.config.json`.
 Los pasos se encadenan con `&&`: si uno falla, los siguientes
 no se ejecutan. La regeneración reemplaza `solution/package/`, por lo que debes
