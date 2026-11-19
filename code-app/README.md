@@ -52,7 +52,7 @@ pwsh ../solution/scripts/regenerate-solution.ps1
 
 > Necesitas PowerShell 7+ (`brew install powershell`) y la CLI de Power Platform autenticada en el entorno.
 
-El script selecciona el perfil configurado en `.env`, exporta la solución `OVIGIGOF` y la descomprime en `../solution/package/`. Si falta la configuración, se detiene con instrucciones. `-PacProfileName <nombre>` permite sobrescribir el perfil; `-PacProfileName ''` usa explícitamente el perfil activo. **La solución descomprimida es de solo lectura** desde el punto de vista del código: se regenera, no se edita a mano. Cuando quieras preparar una release, usa su compañero `../solution/scripts/pack-solution.ps1`.
+El script selecciona el perfil configurado en `.env`, exporta la solución `OVIGIGOF` y la descomprime en `../solution/package/`. Si falta la configuración, se detiene con instrucciones. `-PacProfileName <nombre>` permite sobrescribir el perfil; `-PacProfileName ''` usa explícitamente el perfil activo. **La solución descomprimida es de solo lectura** desde el punto de vista del código: se regenera, no se edita a mano. Para publicar una release, ver [`../solution/`](../solution/).
 
 ## Indicadores de apertura de oficina
 
@@ -122,7 +122,7 @@ por el incremento automático. Para cambiar manualmente una versión funcional o
 mayor, usa `npm version minor --no-git-tag-version` o
 `npm version major --no-git-tag-version` y luego el mismo comando sin incremento.
 La versión de la app es independiente de la versión de cuatro segmentos de la
-solución Dataverse, gestionada por `pack-solution.ps1`.
+solución Dataverse, que sube sola en Dataverse al desplegar.
 
 ## 🗂 Estructura de la carpeta
 
@@ -177,4 +177,4 @@ Para más detalle (columnas, relaciones, tipos) lee [`AGENTS.md`](../AGENTS.md).
 
 - [`AGENTS.md`](../AGENTS.md) — instrucciones para agentes de IA (único archivo de instrucciones del repo).
 - [`../solution/README.md`](../solution/README.md) — guía de instalación para el usuario final.
-- [`../docs/FUTURE_AUTOMATIONS.md`](../docs/FUTURE_AUTOMATIONS.md) — automatizaciones pendientes (publicación automática de releases, etc.).
+- [`../docs/FUTURE_AUTOMATIONS.md`](../docs/FUTURE_AUTOMATIONS.md) — automatizaciones pendientes.

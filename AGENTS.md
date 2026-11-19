@@ -26,8 +26,7 @@ Este es el **único** archivo de instrucciones del repositorio (válido para cua
 | `solution/` | Solución de Dataverse **descomprimida** en `solution/package/` (snapshot automático) y scripts en `solution/scripts/`. El `.zip` se publica por **GitHub Releases**. |
 
 - `solution/scripts/regenerate-solution.ps1` — descarga la solución desde Dataverse y la desempaqueta en `package/`. Lee el perfil PAC de `.env`; `-PacProfileName` permite sobrescribirlo explícitamente.
-- `solution/scripts/pack-solution.ps1` — incrementa la versión y empaqueta `package/` → `solution.zip`.
-- `solution/solution.zip` está ignorado por git; se publica solo vía GitHub Releases (ver `docs/FUTURE_AUTOMATIONS.md`).
+- Releases: se publican a mano. Con la solución ya regenerada y en `master`, lanza la GitHub Action «Release de la solución» desde la pestaña Actions («Run workflow») o con `gh workflow run release-solution.yml`. Empaqueta `solution/package/` y crea la release `vX.X.X.X` con `GoOfi_X.X.X.X.zip`, usando la versión de `Solution.xml` (sube sola en Dataverse al desplegar). Si esa versión ya está publicada, no hace nada.
 - **No commitear** `node_modules/`, `dist/`, `.playwright-mcp/`, `code-app/power.config.json` (IDs locales; plantilla en `power.config.example.json`) ni archivos `.zip`. `code-app/.power/schemas/` sí se versiona: el código generado lo importa.
 - `regenerate-solution.ps1` sustituye en los flujos la URL real de la app y los correos de `defaultValue` por plantillas. No publicar IDs de entorno, app o tenant ni correos del entorno de desarrollo.
 
@@ -315,7 +314,6 @@ pwsh solution/scripts/regenerate-solution.ps1
 
 El script **no es idempotente**: cada ejecución borra `solution/package/` antes de regenerarlo. Si hay cambios sin commitear ahí, se pierden.
 
-Su compañero es `solution/scripts/pack-solution.ps1`, que incrementa el cuarto segmento de la versión en `solution/package/Other/Solution.xml` (por defecto +0.1 → `1.0.0.0` pasa a `1.0.0.1`) y ejecuta `pac solution pack` para generar `solution/solution.zip`, listo para subir como Release de GitHub.
 
 > **⚠️ `solution/package/` es SOLO LECTURA — nunca escribir ahí**
 >

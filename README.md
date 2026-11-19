@@ -46,7 +46,7 @@ Este repo tiene dos partes; entra en la que necesites:
 
 👉 Ve a [`solution/`](./solution/) y sigue su README: importar la solución en Power Platform, asignar los roles `GOF-Usuarios` (y `GOF-Administradores` a quien gestione) y ajustar las variables de entorno.
 
-> 📦 El `.zip` de la solución se publicará en [Releases](../../releases) de GitHub. **Próximamente**: todavía no hay ninguna release publicada.
+> 📦 Descarga el `.zip` de la solución desde [Releases](../../releases). Cada release incluye la versión de la solución que contiene.
 
 ### 👩‍💻 Quiero entender o mejorar el código
 
@@ -81,7 +81,7 @@ Este repo tiene dos partes; entra en la que necesites:
 │   │   ├── Roles/                GOF-Usuarios, GOF-Administradores
 │   │   ├── Workflows/            GOFCrearavisosxreglas, GOFRecordatorioavisos
 │   │   └── ...
-│   └── scripts/                  regenerate-solution.ps1, pack-solution.ps1
+│   └── scripts/                  regenerate-solution.ps1
 │
 └── code-app/                  ← 👩‍💻 desarrollo
     ├── README.md                 "Cómo contribuir"
@@ -92,8 +92,7 @@ Este repo tiene dos partes; entra en la que necesites:
 
 ## 🔮 Próximos pasos
 
-- 📦 **Publicación automática del `.zip` como Release** (ahora es manual). Ver [docs/FUTURE_AUTOMATIONS.md](./docs/FUTURE_AUTOMATIONS.md).
-- Otros pendientes se irán anotando ahí mismo.
+- Ver [docs/FUTURE_AUTOMATIONS.md](./docs/FUTURE_AUTOMATIONS.md).
 
 ## Licencia
 

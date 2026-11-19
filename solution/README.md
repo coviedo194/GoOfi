@@ -4,11 +4,11 @@ Esta carpeta contiene la **solución de Dataverse descomprimida** de GoOfi. Est�
 
 ## 📦 ¿Dónde está el `.zip` para importar?
 
-El archivo distribuible **no vive en este repositorio**. Se publicará como **Release de GitHub** cada vez que haya una nueva versión.
+El archivo distribuible **no vive en este repositorio**. Se publica como **Release de GitHub** con cada versión que el mantenedor decide distribuir.
 
 👉 **[Ir a la sección de Releases](../../releases)** → descarga el último `GoOfi_<versión>.zip`.
 
-> 📦 **Próximamente**: todavía no hay ninguna release publicada. Mientras tanto, puedes generar el `.zip` tú mismo con `pwsh solution/scripts/pack-solution.ps1`.
+> 📦 También puedes generarlo tú mismo: `pac solution pack --zipfile GoOfi.zip --folder solution/package --packagetype Unmanaged`.
 
 ---
 
@@ -117,9 +117,7 @@ solution/
 │       ├── GOFRecordatorioavisos         (recordatorio diario y alerta de apertura por Teams)
 │       └── flujo hijo de notificación   (correo de errores de GoOfi)
 ├── scripts/                    ← scripts de PowerShell para mantener esta carpeta
-│   ├── regenerate-solution.ps1 ← descarga y desempaqueta desde Dataverse → package/
-│   └── pack-solution.ps1       ← incrementa versión, empaqueta package/ → solution.zip
-└── solution.zip                ← (ignorado por git) zip listo para subir como Release
+│   └── regenerate-solution.ps1 ← descarga y desempaqueta desde Dataverse → package/
 ```
 
 > ⚠️ **No edites los archivos XML a mano dentro de `package/`.** Si quieres modificar algo, hazlo desde el código (`code-app/`) o desde el portal de Maker, y luego ejecuta `pwsh solution/scripts/regenerate-solution.ps1` para volver a traer la solución a `package/`.
@@ -144,9 +142,9 @@ Si quieres modificar el código, ve a [`../code-app/`](../code-app/).
 Si quieres entender cómo se mantiene esta solución:
 
 - [`./scripts/regenerate-solution.ps1`](./scripts/regenerate-solution.ps1) — descarga la solución desde Dataverse y la desempaqueta en `package/`.
-- [`./scripts/pack-solution.ps1`](./scripts/pack-solution.ps1) — incrementa la versión y empaqueta `package/` en `solution.zip` listo para distribuir.
+- Releases: se publican a mano. Con la solución ya regenerada y en `master`, lanza la GitHub Action «Release de la solución» desde la pestaña Actions («Run workflow») o con `gh workflow run release-solution.yml`. Empaqueta `solution/package/` y crea la release `vX.X.X.X` con `GoOfi_X.X.X.X.zip`, usando la versión de `Solution.xml` (sube sola en Dataverse al desplegar). Si esa versión ya está publicada, no hace nada.
 
-Ambos se invocan desde la raíz del repo:
+El script se invoca desde la raíz del repo:
 
 Para regenerar, copia `.env.example` como `.env` en la raíz y configura
 `GOOFI_PAC_PROFILE` con el nombre del perfil PAC del entorno fuente no administrado
@@ -157,4 +155,3 @@ usa explícitamente el perfil activo.
 
 ```powershell
 pwsh solution/scripts/regenerate-solution.ps1   # bajar cambios desde Dataverse
-pwsh solution/scripts/pack-solution.ps1         # preparar una nueva release
