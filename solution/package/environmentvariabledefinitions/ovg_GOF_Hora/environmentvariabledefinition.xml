@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="ovg_GOF_Hora">
+  <defaultvalue>14</defaultvalue>
+  <description default="Hora local de envío de las notificaciones. Valor entero entre 0 y 23">
+    <label description="Hora local de envío de las notificaciones. Valor entero entre 0 y 23" languagecode="3082" />
+  </description>
+  <displayname default="GOF_Hora">
+    <label description="GOF_Hora" languagecode="3082" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000001</type>
+</environmentvariabledefinition>

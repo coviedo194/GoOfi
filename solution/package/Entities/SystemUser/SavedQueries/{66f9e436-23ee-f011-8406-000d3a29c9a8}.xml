@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{66f9e436-23ee-f011-8406-000d3a29c9a8}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="fullname" select="1" icon="1" preview="1">
+        <row name="result" id="systemuserid">
+          <cell name="fullname" width="282" />
+          <cell name="internalemailaddress" width="300" />
+          <cell name="ovg_oficinaparagof" width="141" />
+          <cell name="ovg_diasparaavisosautomaticosengof" width="287" />
+          <cell name="ovg_permisodeaperturadeoficina" width="211" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+        <entity name="systemuser">
+          <attribute name="fullname" />
+          <attribute name="systemuserid" />
+          <attribute name="internalemailaddress" />
+          <filter type="and">
+            <condition attribute="deletedstate" operator="eq" value="0" />
+            <condition attribute="isdisabled" operator="eq" value="0" />
+          </filter>
+          <attribute name="ovg_oficinaparagof" />
+          <order attribute="fullname" descending="false" />
+          <attribute name="ovg_diasparaavisosautomaticosengof" />
+          <attribute name="ovg_permisodeaperturadeoficina" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Activos para GoOfi" languagecode="3082" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Vista creada para la aplicación GoOfi" languagecode="3082" />
+    </Descriptions>
+  </savedquery>
+</savedqueries>

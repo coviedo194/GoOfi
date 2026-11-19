@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{ba7ed933-281b-42af-a61c-c43597b24954}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="ovg_identificador" select="1" icon="1" preview="1">
+        <row name="result" id="ovg_avisodegofid">
+          <cell name="ovg_fecha" width="100" />
+          <cell name="ovg_oficina" width="79" />
+          <cell name="ownerid" width="159" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="ovg_avisodegof">
+          <attribute name="ovg_avisodegofid" />
+          <attribute name="ovg_oficina" />
+          <attribute name="ovg_fecha" />
+          <attribute name="ownerid" />
+          <order attribute="ovg_fecha" descending="true" />
+          <order attribute="ovg_oficina" descending="false" />
+          <order attribute="ownerid" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Avisos de GOF" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

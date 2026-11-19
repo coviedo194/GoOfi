@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Role id="{f75552c3-b3c4-f111-aaaf-3833c5c1ce81}" name="GOF-Administradores" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsCustomizable>1</IsCustomizable>
+  <IsAutoAssigned>0</IsAutoAssigned>
+  <RolePrivileges>
+    <RolePrivilege name="prvAppendovg_asistentedeeventoparagof" level="Global" />
+    <RolePrivilege name="prvAppendovg_avisodegof" level="Global" />
+    <RolePrivilege name="prvAppendovg_eventoparagof" level="Global" />
+    <RolePrivilege name="prvAppendovg_oficinaparagof" level="Global" />
+    <RolePrivilege name="prvAppendToovg_asistentedeeventoparagof" level="Global" />
+    <RolePrivilege name="prvAppendToovg_avisodegof" level="Global" />
+    <RolePrivilege name="prvAppendToovg_eventoparagof" level="Global" />
+    <RolePrivilege name="prvAppendToovg_oficinaparagof" level="Global" />
+    <RolePrivilege name="prvAppendToUser" level="Global" />
+    <RolePrivilege name="prvAppendUser" level="Global" />
+    <RolePrivilege name="prvAssignovg_asistentedeeventoparagof" level="Global" />
+    <RolePrivilege name="prvAssignovg_eventoparagof" level="Global" />
+    <RolePrivilege name="prvCreateovg_asistentedeeventoparagof" level="Global" />
+    <RolePrivilege name="prvCreateovg_oficinaparagof" level="Global" />
+    <RolePrivilege name="prvDeleteovg_asistentedeeventoparagof" level="Global" />
+    <RolePrivilege name="prvDeleteovg_avisodegof" level="Global" />
+    <RolePrivilege name="prvDeleteovg_eventoparagof" level="Global" />
+    <RolePrivilege name="prvDeleteovg_oficinaparagof" level="Global" />
+    <RolePrivilege name="prvReadovg_asistentedeeventoparagof" level="Global" />
+    <RolePrivilege name="prvReadovg_avisodegof" level="Global" />
+    <RolePrivilege name="prvReadovg_eventoparagof" level="Global" />
+    <RolePrivilege name="prvReadovg_oficinaparagof" level="Global" />
+    <RolePrivilege name="prvReadPluginAssembly" level="Global" />
+    <RolePrivilege name="prvReadPluginType" level="Global" />
+    <RolePrivilege name="prvReadSdkMessage" level="Global" />
+    <RolePrivilege name="prvReadSdkMessageProcessingStep" level="Global" />
+    <RolePrivilege name="prvReadSdkMessageProcessingStepImage" level="Global" />
+    <RolePrivilege name="prvReadUser" level="Global" />
+    <RolePrivilege name="prvWriteovg_asistentedeeventoparagof" level="Global" />
+    <RolePrivilege name="prvWriteovg_avisodegof" level="Global" />
+    <RolePrivilege name="prvWriteovg_eventoparagof" level="Global" />
+    <RolePrivilege name="prvWriteovg_oficinaparagof" level="Global" />
+    <RolePrivilege name="prvWriteUser" level="Global" />
+  </RolePrivileges>
+</Role>

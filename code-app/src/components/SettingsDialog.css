@@ -1,0 +1,91 @@
+/**
+ * Estilos para SettingsDialog
+ * Modal de configuración del usuario, alineado con el estilo Fluent UI
+ * de la app (paleta azul, esquinas redondeadas, espacios consistentes).
+ */
+
+.settings-surface {
+  max-width: 520px;
+  width: 100%;
+}
+
+.settings-title {
+  color: var(--colorBrandForeground1);
+}
+
+.settings-close-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  color: var(--colorNeutralForeground2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.settings-close-button:hover {
+  background: var(--colorNeutralBackground3);
+  color: var(--colorNeutralForeground1);
+}
+
+.settings-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.settings-saving {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--colorNeutralForeground2);
+}
+
+.settings-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.settings-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--colorNeutralForeground1);
+  line-height: 1.3;
+}
+
+.settings-label-line {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.settings-required {
+  color: var(--colorPaletteRedForeground1);
+  font-weight: 700;
+}
+
+.settings-help-button {
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  color: var(--colorNeutralForeground2);
+}
+
+.settings-version {
+  color: var(--colorNeutralForeground3);
+}
+
+@media (max-width: 540px) {
+  .settings-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}

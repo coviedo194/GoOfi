@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{af153c45-8a0b-4f55-8a85-7998ee988ebd}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{205142a0-f616-42ae-be38-9189ef54367f}" IsUserDefined="1">
+          <labels>
+            <label description="" languagecode="3082" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{812420d5-84af-47ae-ab1e-87b1c3bf3c9b}">
+                  <labels>
+                    <label description="GENERAL" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{ba1cdb46-0ec2-4589-9eb7-0a2ecc926870}">
+                        <labels>
+                          <label description="Identificador" languagecode="3082" />
+                          <label description="Identificador" languagecode="1033" />
+                        </labels>
+                        <control id="ovg_identificador" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="ovg_identificador" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7010b2d5-0f69-43c1-8efb-06b3051d9fb7}">
+                        <labels>
+                          <label description="Propietario" languagecode="3082" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Información" languagecode="3082" />
+    </LocalizedNames>
+  </systemform>
+</forms>

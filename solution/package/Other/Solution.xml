@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.26102.136" SolutionPackageVersion="9.2" languagecode="3082" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26102.136" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26102.00136">
+  <SolutionManifest>
+    <UniqueName>OVIGIGOF</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="OVIGI GOF" languagecode="3082" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="&#xA;Publicador&#xA;Ovigi&#xA;Revisión&#xA;No&#xA;Descripción&#xA;OVIGIGOF — Coordina la presencialidad en la oficina entre compañeros remotos (eventos, avisos y oficinas). Repositorio: https://github.com/coviedo194/GoOfi Documentación: https://github.com/coviedo194/GoOfi/blob/master/README.md" languagecode="3082" />
+    </Descriptions>
+    <Version>1.0.0.20</Version>
+    <Managed>0</Managed>
+    <Publisher>
+      <UniqueName>Ovigi</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="Ovigi" languagecode="3082" />
+      </LocalizedNames>
+      <Descriptions />
+      <EMailAddress>coviedo194@outlook.com</EMailAddress>
+      <SupportingWebsiteUrl>https://www.linkedin.com/in/coviedo194</SupportingWebsiteUrl>
+      <CustomizationPrefix>ovg</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>88656</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City>Madrid</City>
+          <County xsi:nil="true"></County>
+          <Country>España</Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince>madrid</StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="ovg_asistentedeeventoparagof" behavior="0" />
+      <RootComponent type="1" schemaName="ovg_avisodegof" behavior="0" />
+      <RootComponent type="1" schemaName="ovg_eventoparagof" behavior="0" />
+      <RootComponent type="1" schemaName="ovg_oficinaparagof" behavior="0" />
+      <RootComponent type="1" schemaName="systemuser" behavior="2" />
+      <RootComponent type="20" id="{052c16eb-938e-f111-8077-3833c5c1ce81}" behavior="0" />
+      <RootComponent type="20" id="{f75552c3-b3c4-f111-aaaf-3833c5c1ce81}" behavior="0" />
+      <RootComponent type="29" id="{1aa6d17c-a320-f111-8342-000d3a29c9a8}" behavior="0" />
+      <RootComponent type="29" id="{45cf0f22-81de-f111-84ea-3833c5c1ce81}" behavior="0" />
+      <RootComponent type="29" id="{bcb90ee0-e335-f111-88b5-000d3a29c9a8}" behavior="0" />
+      <RootComponent type="300" schemaName="ovg_gooficodeapp_4bde1" behavior="0" />
+      <RootComponent type="61" schemaName="ovg_gofTableGenericIcon" behavior="0" />
+      <RootComponent type="62" schemaName="ovg_GoOfiAdmin" behavior="0" />
+      <RootComponent type="80" schemaName="ovg_GoOfiAdmin" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="2" schemaName="deletedstate" displayName="Estado eliminado" parentSchemaName="systemuser" parentDisplayName="Usuario" solution="AuthorizationCore (1.137.0.0)">
+          <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="Activos para GoOfi" displayName="Activos para GoOfi" parentSchemaName="systemuser" parentDisplayName="Usuario" id="{66f9e436-23ee-f011-8406-000d3a29c9a8}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
+        <Dependent type="80" schemaName="ovg_GoOfiAdmin" displayName="GoOfi - Admin" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.27)" id.uniquename="AppChannel">
+          <package appName="PowerAppsAppFramework Package" version="1.0.0.27">PowerAppsAppFramework_Anchor (1.0.0.27)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=ovg_GoOfiAdmin,settingdefinitionid.uniquename=AppChannel" id.parentappmoduleid.uniquename="ovg_GoOfiAdmin" id.settingdefinitionid.uniquename="AppChannel" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>

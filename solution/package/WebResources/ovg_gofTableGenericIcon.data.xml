@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{92dde5c2-d930-f111-88b5-000d3a29c9a8}</WebResourceId>
+  <Name>ovg_gofTableGenericIcon</Name>
+  <DisplayName>gofTableGenericIcon</DisplayName>
+  <WebResourceType>11</WebResourceType>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/ovg_gofTableGenericIcon92DDE5C2-D930-F111-88B5-000D3A29C9A8</FileName>
+</WebResource>

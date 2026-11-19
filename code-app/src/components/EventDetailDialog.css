@@ -1,0 +1,147 @@
+/**
+ * Estilos para EventDetailDialog
+ * Modal con detalle completo del evento, alineado con el estilo Fluent UI
+ * de la app (esquinas redondeadas, tipografía consistente, paleta azul).
+ */
+
+.event-detail-surface {
+  max-width: 560px;
+  width: 100%;
+}
+
+.event-detail-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.event-detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.event-detail-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.event-detail-meta-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: var(--colorNeutralForeground2);
+}
+
+.event-detail-meta-row > svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--colorBrandForeground1);
+}
+
+.event-detail-meta-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.event-detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event-detail-section-title {
+  color: var(--colorNeutralForeground1);
+}
+
+.event-detail-description {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--colorNeutralForeground1);
+  background: var(--colorNeutralBackground2);
+  border: 1px solid var(--colorNeutralStroke2);
+  border-radius: 4px;
+  padding: 0.75rem;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.event-detail-description p {
+  margin: 0 0 0.5rem 0;
+}
+
+.event-detail-description p:last-child {
+  margin-bottom: 0;
+}
+
+.event-detail-description img {
+  max-width: 100%;
+  height: auto;
+}
+
+.event-detail-empty {
+  color: var(--colorNeutralForeground4);
+  font-style: italic;
+}
+
+.event-detail-attendees-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--colorNeutralForeground1);
+}
+
+.event-detail-attendees-header > svg {
+  color: var(--colorBrandForeground1);
+}
+
+.event-detail-my-attendance {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.65rem;
+  background: var(--colorBrandBackground2);
+  border: 1px solid var(--colorBrandStroke2);
+  border-radius: 4px;
+}
+
+.event-detail-my-attendance .fui-Switch {
+  width: 100%;
+}
+
+.event-detail-my-attendance .fui-Switch__label {
+  font-weight: 600;
+  color: var(--colorNeutralForeground1);
+}
+
+.event-detail-attendees-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.event-detail-attendee {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  background: var(--colorNeutralBackground2);
+  border-radius: 4px;
+  color: var(--colorNeutralForeground1);
+}
+
+.event-detail-attendee > svg {
+  color: var(--colorNeutralForeground2);
+}
+
+.event-detail-loading {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>ovg_gooficodeapp_4bde1</Name>
+  <AppVersion>2026-11-12T16:34:53Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>0.0.0.0</CreatedByClientVersion>
+  <MinClientVersion>0.0.0.0</MinClientVersion>
+  <Tags>{}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>RGBA(255,255,255,1)</BackgroundColor>
+  <DisplayName>GoOfi</DisplayName>
+  <Description></Description>
+  <CommitMessage xsi:nil="true"></CommitMessage>
+  <Publisher></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{}</ConnectionReferences>
+  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified","environmentVariableName":""}},"dataSources":{"oficinasparagof":{"entitySetName":"ovg_oficinaparagofs","logicalName":"ovg_oficinaparagof"},"avisosdegof":{"entitySetName":"ovg_avisodegofs","logicalName":"ovg_avisodegof"},"eventosparagof":{"entitySetName":"ovg_eventoparagofs","logicalName":"ovg_eventoparagof"},"asistentesdeeventoparagof":{"entitySetName":"ovg_asistentedeeventoparagofs","logicalName":"ovg_asistentedeeventoparagof"},"environment_39a902ba":{"entitySetName":"Environment","logicalName":"environment_39a902ba"},"usuarios":{"entitySetName":"systemusers","logicalName":"systemuser"}}}}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>4</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"logicalname":"ovg_oficinaparagof","componenttype":1},{"logicalname":"ovg_avisodegof","componenttype":1},{"logicalname":"ovg_eventoparagof","componenttype":1},{"logicalname":"ovg_asistentedeeventoparagof","componenttype":1},{"logicalname":"systemuser","componenttype":1}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <CodeAppPackageUris>
+    <CodeAppPackageUri>/CanvasApps/ovg_gooficodeapp_4bde1_CodeAppPackages/index.html_ContentType_text/html</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/ovg_gooficodeapp_4bde1_CodeAppPackages/assets/fluentui-BkmLEo5w.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/ovg_gooficodeapp_4bde1_CodeAppPackages/assets/index-DI39d_jI.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/ovg_gooficodeapp_4bde1_CodeAppPackages/assets/index-mjpaVT4J.css_ContentType_text/css</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/ovg_gooficodeapp_4bde1_CodeAppPackages/vite.svg_ContentType_image/svg+xml</CodeAppPackageUri>
+  </CodeAppPackageUris>
+</CanvasApp>

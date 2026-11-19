@@ -1,0 +1,989 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps-1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ovg_GOF_Dataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_teams": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ovg_GOF_Teams"
+        },
+        "api": {
+          "name": "shared_teams"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "GOF_UrlCanvasApp (ovg_GOF_UrlCanvasApp)": {
+          "defaultValue": "https://apps.powerapps.com/play/e/{GUID DE TU ENTORNO}/app/{GUID DE LA APP}?tenantId={TU TENANT ID}",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ovg_GOF_UrlCanvasApp"
+          }
+        },
+        "GOF_Hora (ovg_GOF_Hora)": {
+          "defaultValue": 14,
+          "type": "Int",
+          "metadata": {
+            "schemaName": "ovg_GOF_Hora",
+            "description": "Hora local de envío de las notificaciones. Valor entero entre 0 y 23"
+          }
+        }
+      },
+      "triggers": {
+        "Periodicidad": {
+          "recurrence": {
+            "frequency": "Hour",
+            "interval": 1,
+            "startTime": "2026-11-09T21:00:30Z"
+          },
+          "evaluatedRecurrence": {
+            "frequency": "Hour",
+            "interval": 1,
+            "startTime": "2026-11-09T21:00:30Z"
+          },
+          "metadata": {
+            "operationMetadataId": "902d6d22-2dbe-4304-8ce1-08c13dde1d13"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "ScpPrincipal": {
+          "actions": {
+            "ScpFechas": {
+              "actions": {
+                "esViernes": {
+                  "runAfter": {
+                    "localNow": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "8427409c-8261-4574-9dfb-b97d4e6cf230"
+                  },
+                  "type": "Compose",
+                  "inputs": "@equals(\n    dayOfWeek(\n        outputs('localNow')\n    ),\n    5\n)"
+                },
+                "GetZonaHoraria": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "876396be-4858-48cb-98aa-de979365ebbd"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "timezonedefinitions",
+                      "fetchXml": "<fetch>\n  <entity name='timezonedefinition'>\n    <attribute name='standardname' />\n    <link-entity name='usersettings' from='timezonecode' to='timezonecode' alias='u'>\n      <filter>\n        <condition attribute='systemuserid' operator='eq-userid' />\n      </filter>\n    </link-entity>\n  </entity>\n</fetch>",
+                      "x-ms-odata-metadata-full": false
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps-1",
+                      "operationId": "ListRecords"
+                    }
+                  }
+                },
+                "zonaHoraria": {
+                  "runAfter": {
+                    "GetZonaHoraria": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "3f0e5da7-3f2e-4e2a-830e-f0779b344ade"
+                  },
+                  "type": "Compose",
+                  "inputs": "@outputs('GetZonaHoraria')?['body/value'][0]['standardname']"
+                },
+                "localNow": {
+                  "runAfter": {
+                    "zonaHoraria": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "039039f5-5b43-4520-a821-e06c26353700"
+                  },
+                  "type": "Compose",
+                  "inputs": "@convertFromUtc(\n    utcNow(),\n    outputs('zonaHoraria')\n)"
+                },
+                "nextDate": {
+                  "runAfter": {
+                    "esViernes": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "8458afe3-002a-459e-ad05-e8a0aa18cd21"
+                  },
+                  "type": "Compose",
+                  "inputs": "@addDays(\n    formatDateTime(\n        outputs('localNow'),\n        'yyyy-MM-dd'\n    ),\n    if(\n        bool(\n            outputs('esViernes')\n        ),\n        3,\n        1\n    ),\n  'yyyy-MM-dd'\n)"
+                },
+                "nextLocalDatetimeFrom": {
+                  "runAfter": {
+                    "nextDate": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "88a857cd-909f-46c0-8bd5-5b8cb74394e4"
+                  },
+                  "type": "Compose",
+                  "inputs": "@{outputs('nextDate')}T00:00:00"
+                },
+                "nextUtcDatetimeFrom": {
+                  "runAfter": {
+                    "nextLocalDatetimeTo": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "5f77ebbf-dea5-4b5f-99a9-49101d8f1adb"
+                  },
+                  "type": "Compose",
+                  "inputs": "@convertToUtc(\n  outputs('nextLocalDatetimeFrom'),\n  outputs('zonaHoraria')\n)"
+                },
+                "nextUtcDatetimeTo": {
+                  "runAfter": {
+                    "nextUtcDatetimeFrom": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "c354b9f1-0f9e-42f6-9527-c126672f135c"
+                  },
+                  "type": "Compose",
+                  "inputs": "@convertToUtc(\n  outputs('nextLocalDatetimeTo'),\n  outputs('zonaHoraria')\n)"
+                },
+                "nextLocalDatetimeTo": {
+                  "runAfter": {
+                    "nextLocalDatetimeFrom": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "2ec0e4b3-68cf-45a2-b35d-00663d0467f4"
+                  },
+                  "type": "Compose",
+                  "inputs": "@{outputs('nextDate')}T23:59:59"
+                },
+                "localTodayFrom": {
+                  "runAfter": {
+                    "esViernes": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "4abf5f37-4652-467f-829c-0d9d968a22fe"
+                  },
+                  "type": "Compose",
+                  "inputs": "@{formatDateTime(\n  outputs('localNow'),\n  'yyyy-MM-dd'\n)\n}T00:00:00"
+                },
+                "localTodayTo": {
+                  "runAfter": {
+                    "localTodayFrom": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "d1a0c1df-4094-4f47-ad80-7ae63e46724c"
+                  },
+                  "type": "Compose",
+                  "inputs": "@{formatDateTime(\n  outputs('localNow'),\n  'yyyy-MM-dd'\n)\n}T23:59:59"
+                },
+                "utcTodayFrom": {
+                  "runAfter": {
+                    "localTodayTo": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "8647f21f-ed13-4a47-a810-e63a5acd56c5"
+                  },
+                  "type": "Compose",
+                  "inputs": "@convertToUtc(\n  outputs('localTodayFrom'),\n  outputs('zonaHoraria')\n)"
+                },
+                "utcTodayTo": {
+                  "runAfter": {
+                    "utcTodayFrom": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "2dcd7f1e-c006-4463-a6e2-91bfee44a47b"
+                  },
+                  "type": "Compose",
+                  "inputs": "@convertToUtc(\n  outputs('localTodayTo'),\n  outputs('zonaHoraria')\n)"
+                }
+              },
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "e4d4614d-6cc6-480e-be97-78533ab5d326"
+              },
+              "type": "Scope"
+            },
+            "corresponde": {
+              "actions": {
+                "urlCanvasApp": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "516b1deb-5565-4a0f-8bdf-754a61d6348d"
+                  },
+                  "type": "Compose",
+                  "inputs": "@parameters('GOF_UrlCanvasApp (ovg_GOF_UrlCanvasApp)')",
+                  "description": "Url de canvas app"
+                },
+                "GetOfis": {
+                  "runAfter": {
+                    "urlCanvasApp": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "a63b390c-bb58-4f00-b4bb-b7d2b97c93bf"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "ovg_oficinaparagofs",
+                      "$select": "ovg_nombre,ovg_oficinaparagofid,ovg_idconversacionteams",
+                      "$filter": "statecode eq 0",
+                      "x-ms-odata-metadata-full": false
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps-1",
+                      "operationId": "ListRecords"
+                    }
+                  },
+                  "description": "obtener oficinas activas"
+                },
+                "loopOfis": {
+                  "foreach": "@outputs('GetOfis')?['body/value']",
+                  "actions": {
+                    "prt_emailBody": {
+                      "runAfter": {
+                        "Scp1": [
+                          "Succeeded"
+                        ],
+                        "Scp2": [
+                          "Succeeded"
+                        ],
+                        "Scp3": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "9801e5a8-e90c-44b3-aef1-a1c751e1180e"
+                      },
+                      "type": "Compose",
+                      "inputs": "<p>Novedades para la ofi de <strong>@{item()?['ovg_nombre']}</strong>:</p>\n@{if(\n  greater(\n    length(outputs('GetAvisos1')?['body/value'])\n    ,0\n  ),\n  outputs('emailBodyAvisos1'),\n  '' \n)}\n@{if(\n  greater(\n    length(outputs('GetEventos3')?['body/value'])\n    ,0\n  ),\n  outputs('emailBodyEventos3') ,\n  ''\n)}\n@{if(\n  greater(\n    length(outputs('GetAvisos2')?['body/value'])\n    ,0\n  ),\n  outputs('emailBodyAvisos2') ,\n  ''\n)}\n<p>Para más info. hacer clic <a href=\"@{outputs('urlCanvasApp')}\" target=\"_blank\"> aquí</a></p>\n<p><b><i>GoOfi - Nos vemos allí!</i></b></p>\n"
+                    },
+                    "Scp1": {
+                      "actions": {
+                        "readme1": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "813efdf0-c2bd-49f1-a7a2-c06df35fd2a4"
+                          },
+                          "type": "Compose",
+                          "inputs": "1 - Personas que van mañana (o el lunes si es viernes)"
+                        },
+                        "filterGetAvisos1": {
+                          "runAfter": {
+                            "readme1": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "9c6ed767-52c0-4bbd-9811-234e7266ca7d"
+                          },
+                          "type": "Compose",
+                          "inputs": "and Microsoft.Dynamics.CRM.On(PropertyName='ovg_fecha',PropertyValue='@{outputs('nextDate')}')",
+                          "description": "no referenciado temporalmente durante el desarrollo"
+                        },
+                        "GetAvisos1": {
+                          "runAfter": {
+                            "filterGetAvisos1": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "dcfc7c2b-98e0-44af-95bc-34fc2b6854ee"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "parameters": {
+                              "entityName": "ovg_avisodegofs",
+                              "$select": "ovg_avisodegofid",
+                              "$filter": "statecode eq 0 and _ovg_oficina_value eq @{item()?['ovg_oficinaparagofid']} @{outputs('filterGetAvisos1')}",
+                              "x-ms-odata-metadata-full": false,
+                              "$expand": "owninguser($select=fullname,ovg_permisodeaperturadeoficina)"
+                            },
+                            "host": {
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                              "connectionName": "shared_commondataserviceforapps-1",
+                              "operationId": "ListRecords"
+                            }
+                          },
+                          "runtimeConfiguration": {
+                            "paginationPolicy": {
+                              "minimumItemCount": 5000
+                            }
+                          }
+                        },
+                        "HayItems1": {
+                          "actions": {
+                            "SelectInfo1": {
+                              "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "276f3170-a10b-44a6-a369-ca86e369df32"
+                              },
+                              "type": "Select",
+                              "inputs": {
+                                "from": "@outputs('GetAvisos1')?['body/value']",
+                                "select": "@concat('<li>',item()['owninguser/fullname'],'</li>')"
+                              }
+                            },
+                            "emailBodyAvisos1": {
+                              "runAfter": {
+                                "SelectInfo1": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "metadata": {
+                                "operationMetadataId": "d432061c-42a8-43ae-b173-bf3972e282bd"
+                              },
+                              "type": "Compose",
+                              "inputs": "<p>Personas que iran a la ofi @{if(\n  bool(\n    outputs('esViernes')\n  ),\n  '<strong>el lunes</strong>',\n  '<strong>mañana</strong>'\n)}:</p>\n<ul>\n@{join(\n  body('SelectInfo1'),'\n')}\n</ul>"
+                            }
+                          },
+                          "runAfter": {
+                            "GetAvisos1": [
+                              "Succeeded"
+                            ]
+                          },
+                          "expression": {
+                            "and": [
+                              {
+                                "greater": [
+                                  "@length(outputs('GetAvisos1')?['body/value'])",
+                                  0
+                                ]
+                              }
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "fb55fc2b-f596-4010-a440-104497a42adf"
+                          },
+                          "type": "If"
+                        }
+                      },
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "72036e7a-1590-4f89-adc8-de3be54c933f"
+                      },
+                      "type": "Scope"
+                    },
+                    "Scp2": {
+                      "actions": {
+                        "readme2": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "913dfde6-4904-41c9-935a-8b81fa10e734"
+                          },
+                          "type": "Compose",
+                          "inputs": "1 - Avisos creados hoy"
+                        },
+                        "filterGetAvisos2": {
+                          "runAfter": {
+                            "readme2": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "abae157f-2949-439a-9d5b-ee8443e7c505"
+                          },
+                          "type": "Compose",
+                          "inputs": "and createdon ge @{outputs('utcTodayFrom')} and createdon le @{outputs('utcTodayTo')}",
+                          "description": "no referenciado temporalmente durante el desarrollo"
+                        },
+                        "GetAvisos2": {
+                          "runAfter": {
+                            "filterGetAvisos2": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "b932af5c-d5f6-4bac-bf78-a65be0caf520"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "parameters": {
+                              "entityName": "ovg_avisodegofs",
+                              "$select": "ovg_avisodegofid,ovg_fecha",
+                              "$filter": "statecode eq 0 and _ovg_oficina_value eq @{item()?['ovg_oficinaparagofid']} @{outputs('filterGetAvisos2')}",
+                              "$orderby": "ovg_fecha asc",
+                              "x-ms-odata-metadata-full": false,
+                              "$expand": "owninguser($select=fullname)"
+                            },
+                            "host": {
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                              "connectionName": "shared_commondataserviceforapps-1",
+                              "operationId": "ListRecords"
+                            }
+                          },
+                          "runtimeConfiguration": {
+                            "paginationPolicy": {
+                              "minimumItemCount": 5000
+                            }
+                          }
+                        },
+                        "HayItems2": {
+                          "actions": {
+                            "SelectInfo2": {
+                              "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "f0e1bf55-d6c7-495c-bb66-15c94d040bad"
+                              },
+                              "type": "Select",
+                              "inputs": {
+                                "from": "@outputs('GetAvisos2')?['body/value']",
+                                "select": "@concat(\n  '<li>',\n  item()['owninguser/fullname'],\n  ' - ',\n  formatDateTime(\n    item()['ovg_fecha'],\n    'dd-MMM',\n    'es'\n  ),\n  '</li>'\n)"
+                              }
+                            },
+                            "emailBodyAvisos2": {
+                              "runAfter": {
+                                "SelectInfo2": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "metadata": {
+                                "operationMetadataId": "5c722f6c-9259-461d-af0d-b6340e268c28"
+                              },
+                              "type": "Compose",
+                              "inputs": "<p>Avisos creados hoy:</p>\n<ul>\n@{join(\n  body('SelectInfo2'),'\n')}\n</ul>"
+                            }
+                          },
+                          "runAfter": {
+                            "GetAvisos2": [
+                              "Succeeded"
+                            ]
+                          },
+                          "expression": {
+                            "and": [
+                              {
+                                "greater": [
+                                  "@length(outputs('GetAvisos2')?['body/value'])",
+                                  0
+                                ]
+                              }
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "75738bd7-9a5d-46ea-9c08-07c89306e8bf"
+                          },
+                          "type": "If"
+                        }
+                      },
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "044e8b60-6f93-4686-a785-b376fc4bac4e"
+                      },
+                      "type": "Scope"
+                    },
+                    "Scp3": {
+                      "actions": {
+                        "readme3": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "9ad1258f-3ec8-48f8-9c11-79508e93c1ab"
+                          },
+                          "type": "Compose",
+                          "inputs": "1 - Eventos para mañana (o el lunes si es viernes)"
+                        },
+                        "filterGetEventos3": {
+                          "runAfter": {
+                            "readme3": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "dd445c11-b177-4d5a-ab22-f5a9d3d0a012"
+                          },
+                          "type": "Compose",
+                          "inputs": "and ovg_fecha ge @{outputs('nextUtcDatetimeFrom')} and ovg_fecha le @{outputs('nextUtcDatetimeTo')}",
+                          "description": "no referenciado temporalmente durante el desarrollo"
+                        },
+                        "GetEventos3": {
+                          "runAfter": {
+                            "filterGetEventos3": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "b1e93d99-85fe-4438-89da-6243c5a92d7b"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "parameters": {
+                              "entityName": "ovg_eventoparagofs",
+                              "$select": "ovg_eventoparagofid,ovg_asunto,ovg_fecha",
+                              "$filter": "statecode eq 0 and _ovg_oficina_value eq @{item()?['ovg_oficinaparagofid']} @{outputs('filterGetEventos3')}",
+                              "x-ms-odata-metadata-full": false,
+                              "$expand": "owninguser($select=fullname)"
+                            },
+                            "host": {
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                              "connectionName": "shared_commondataserviceforapps-1",
+                              "operationId": "ListRecords"
+                            }
+                          },
+                          "runtimeConfiguration": {
+                            "paginationPolicy": {
+                              "minimumItemCount": 5000
+                            }
+                          }
+                        },
+                        "HayItems3": {
+                          "actions": {
+                            "SelectInfo3": {
+                              "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "f9c3a061-ec8c-4656-9e67-70c237c64861"
+                              },
+                              "type": "Select",
+                              "inputs": {
+                                "from": "@outputs('GetEventos3')?['body/value']",
+                                "select": "@concat(\n  '<li>',\n  item()['ovg_asunto'],\n  ' - ',\n  convertFromUtc(\n    item()['ovg_fecha'],\n    outputs('zonaHoraria'),\n    'HH:mm'\n  ),\n  ' - ',\n  item()['owninguser/fullname'],\n  '</li>'\n)"
+                              }
+                            },
+                            "emailBodyEventos3": {
+                              "runAfter": {
+                                "SelectInfo3": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "metadata": {
+                                "operationMetadataId": "14111d6a-186c-4efe-bc6f-b19c29b4c270"
+                              },
+                              "type": "Compose",
+                              "inputs": "<p>Eventos para @{if(\n  bool(\n    outputs('esViernes')\n  ),\n  '<strong>el lunes</strong>',\n  '<strong>mañana</strong>'\n)}:</p>\n<ul>\n@{join(\n  body('SelectInfo3'),'\n')}\n</ul>"
+                            }
+                          },
+                          "runAfter": {
+                            "GetEventos3": [
+                              "Succeeded"
+                            ]
+                          },
+                          "expression": {
+                            "and": [
+                              {
+                                "greater": [
+                                  "@length(outputs('GetEventos3')?['body/value'])",
+                                  0
+                                ]
+                              }
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "b2f9e6e0-8fec-4a00-85b2-ca637187935b"
+                          },
+                          "type": "If"
+                        }
+                      },
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "cf93140e-7282-4ae6-9537-e534470dc0f3"
+                      },
+                      "type": "Scope"
+                    },
+                    "SiHayDatosQueNotificar": {
+                      "actions": {
+                        "GetUsers": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "0375ea02-d776-490a-a99a-927ecbe74913"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "parameters": {
+                              "entityName": "systemusers",
+                              "$select": "internalemailaddress",
+                              "$filter": "isdisabled eq false and _ovg_oficinaparagof_value eq @{items('loopOfis')?['ovg_oficinaparagofid']} and internalemailaddress ne null",
+                              "$orderby": "fullname asc"
+                            },
+                            "host": {
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                              "connectionName": "shared_commondataserviceforapps-1",
+                              "operationId": "ListRecords"
+                            }
+                          },
+                          "description": "obtener usuarios que tenga oficina configurada la que se esté iterando",
+                          "runtimeConfiguration": {
+                            "paginationPolicy": {
+                              "minimumItemCount": 5000
+                            }
+                          }
+                        },
+                        "HayUsuariosQueNotificar": {
+                          "actions": {
+                            "loopUsers": {
+                              "foreach": "@outputs('GetUsers')?['body/value']",
+                              "actions": {
+                                "Publicar_mensaje_en_un_chat_o_canal": {
+                                  "runAfter": {},
+                                  "metadata": {
+                                    "operationMetadataId": "6941e5b8-3e0c-40b0-9514-d444efa384a0"
+                                  },
+                                  "type": "OpenApiConnection",
+                                  "inputs": {
+                                    "parameters": {
+                                      "poster": "Flow bot",
+                                      "location": "Chat with Flow bot",
+                                      "body/recipient": "@items('loopUsers')?['internalemailaddress']",
+                                      "body/messageBody": "@outputs('prt_emailBody')"
+                                    },
+                                    "host": {
+                                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams",
+                                      "connectionName": "shared_teams",
+                                      "operationId": "PostMessageToConversation"
+                                    }
+                                  }
+                                }
+                              },
+                              "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "1f998c0e-bc9f-4c7a-841a-033cbfa3d3cd"
+                              },
+                              "type": "Foreach"
+                            }
+                          },
+                          "runAfter": {
+                            "GetUsers": [
+                              "Succeeded"
+                            ]
+                          },
+                          "expression": {
+                            "and": [
+                              {
+                                "greater": [
+                                  "@length(outputs('GetUsers')?['body/value'])",
+                                  0
+                                ]
+                              }
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "73e2b29c-cacd-4b1d-b671-13def2ef9942"
+                          },
+                          "type": "If"
+                        }
+                      },
+                      "runAfter": {
+                        "prt_emailBody": [
+                          "Succeeded"
+                        ]
+                      },
+                      "expression": {
+                        "or": [
+                          {
+                            "greater": [
+                              "@length(outputs('GetAvisos1')?['body/value'])",
+                              0
+                            ]
+                          },
+                          {
+                            "greater": [
+                              "@length(outputs('GetAvisos2')?['body/value'])",
+                              0
+                            ]
+                          },
+                          {
+                            "greater": [
+                              "@length(outputs('GetEventos3')?['body/value'])",
+                              0
+                            ]
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "e139938e-c578-4e9a-a238-3102c88f5aa1"
+                      },
+                      "type": "If"
+                    },
+                    "AvisosConPermisoApertura": {
+                      "runAfter": {
+                        "Scp1": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "a106b00b-5f39-4c85-80c3-bfa50dd7f76e"
+                      },
+                      "type": "Query",
+                      "inputs": {
+                        "from": "@outputs('GetAvisos1')?['body/value']",
+                        "where": "@equals(item()?['owninguser/ovg_permisodeaperturadeoficina'], true)"
+                      }
+                    },
+                    "SiFaltaAperturaNotificarChatGrupal": {
+                      "actions": {
+                        "PublicarAvisoAperturaEnChatGrupal": {
+                          "runAfter": {
+                            "si_hay_avisos": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "f937e7d9-7f3d-492c-a451-43ea5c8ca1fb"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "parameters": {
+                              "poster": "Flow bot",
+                              "location": "Group chat",
+                              "body/recipient": "@items('loopOfis')?['ovg_idconversacionteams']",
+                              "body/messageBody": "<p class=\"editor-paragraph\">@{variables('varMsg')}</p><p>Para avisar si vas a la ofi, abre <a href=\"@{outputs('urlCanvasApp')}\" target=\"_blank\">GoOfi</a>.</p>"
+                            },
+                            "host": {
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams",
+                              "connectionName": "shared_teams",
+                              "operationId": "PostMessageToConversation"
+                            }
+                          }
+                        },
+                        "si_hay_avisos": {
+                          "actions": {
+                            "set_varMsg_nadie_va": {
+                              "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "25b7730d-0019-4224-8b60-068a64ee95fd"
+                              },
+                              "type": "SetVariable",
+                              "inputs": {
+                                "name": "varMsg",
+                                "value": "<p><strong>Atención oficina @{items('loopOfis')?['ovg_nombre']}:</strong> para la sgte. jornada no hay ninguna persona con aviso de asistencia, con o sin llave.</p>"
+                              }
+                            }
+                          },
+                          "runAfter": {},
+                          "else": {
+                            "actions": {
+                              "set_varMsg_nadie_con_llave_va": {
+                                "runAfter": {},
+                                "metadata": {
+                                  "operationMetadataId": "21ac9c7b-0c03-4268-92c5-f9dcaeb93c45"
+                                },
+                                "type": "SetVariable",
+                                "inputs": {
+                                  "name": "varMsg",
+                                  "value": "<p><strong>Atención oficina @{items('loopOfis')?['ovg_nombre']}:</strong> para la sgte. jornada hay personas que han notificado que irán, <strong>pero ninguna de ellas con llaves</strong>.</p>"
+                                }
+                              }
+                            }
+                          },
+                          "expression": {
+                            "and": [
+                              {
+                                "equals": [
+                                  "@length(outputs('GetAvisos1')?['body/value'])",
+                                  0
+                                ]
+                              }
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "3c483627-83e5-4f8b-ae75-f2458c4d2d47"
+                          },
+                          "type": "If"
+                        }
+                      },
+                      "runAfter": {
+                        "AvisosConPermisoApertura": [
+                          "Succeeded"
+                        ]
+                      },
+                      "expression": {
+                        "and": [
+                          {
+                            "greater": [
+                              "@length(trim(coalesce(items('loopOfis')?['ovg_idconversacionteams'],'')))",
+                              0
+                            ]
+                          },
+                          {
+                            "or": [
+                              {
+                                "equals": [
+                                  "@length(outputs('GetAvisos1')?['body/value'])",
+                                  0
+                                ]
+                              },
+                              {
+                                "equals": [
+                                  "@length(body('AvisosConPermisoApertura'))",
+                                  0
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "8d40c307-20d4-4416-953f-2d95bb2e0ad9"
+                      },
+                      "type": "If",
+                      "description": "And(\n    Oficina tiene chat id configurado;\n    Or(\n        cant de avisos = 0;\n        cant de avisos con permiso de apertura = 0\n    )\n)"
+                    }
+                  },
+                  "runAfter": {
+                    "GetOfis": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "6958b0b3-b91e-4cf2-999b-ba4c2bd18060"
+                  },
+                  "type": "Foreach",
+                  "runtimeConfiguration": {
+                    "concurrency": {
+                      "repetitions": 10
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "ScpFechas": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@int(\n  formatDateTime(\n    outputs('localNow'),\n    'HH'\n  )\n)\n",
+                      "@int(\n  parameters('GOF_Hora (ovg_GOF_Hora)')\n)"
+                    ]
+                  },
+                  {
+                    "not": {
+                      "equals": [
+                        "@dayOfWeek(\n    outputs('localNow')\n)",
+                        0
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "equals": [
+                        "@dayOfWeek(\n    outputs('localNow')\n)",
+                        6
+                      ]
+                    }
+                  }
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "acad7a5d-e236-409d-be2a-575737643f9e"
+              },
+              "type": "If",
+              "description": "si \nla hora actual es igual a la hora de notificaciones\nno es Dom (0), ni Sab (6)"
+            }
+          },
+          "runAfter": {
+            "init_varMsg": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "1405da83-f6f1-46da-9bd3-633bf8e02a8c"
+          },
+          "type": "Scope"
+        },
+        "init_varMsg": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "caf34e81-eec8-4189-9241-724036ea3f13"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "varMsg",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "ScpError": {
+          "actions": {
+            "NotificarError": {
+              "runAfter": {},
+              "type": "Workflow",
+              "inputs": {
+                "host": {
+                  "workflowReferenceName": "45cf0f22-81de-f111-84ea-3833c5c1ce81"
+                },
+                "body": {
+                  "workflow": "@string(workflow())"
+                },
+                "retryPolicy": {
+                  "type": "none"
+                }
+              }
+            },
+            "FinalizarConError": {
+              "runAfter": {
+                "NotificarError": [
+                  "Succeeded",
+                  "Failed",
+                  "TimedOut",
+                  "Skipped"
+                ]
+              },
+              "type": "Terminate",
+              "inputs": {
+                "runStatus": "Failed",
+                "runError": {
+                  "code": "GOF_ErrorFlujo",
+                  "message": "La lógica principal de GoOfi ha fallado. Consulta ScpPrincipal para el error original y ScpError para el resultado de la notificación."
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "ScpPrincipal": [
+              "Failed",
+              "TimedOut",
+              "Skipped"
+            ]
+          },
+          "type": "Scope",
+          "description": "Notifica los fallos de GoOfi y conserva el estado fallido aunque la notificación también falle."
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

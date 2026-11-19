@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModule>
+  <UniqueName>ovg_GoOfiAdmin</UniqueName>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <WebResourceId>953b9fac-1e5e-e611-80d6-00155ded156f</WebResourceId>
+  <OptimizedFor></OptimizedFor>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <FormFactor>1</FormFactor>
+  <ClientType>4</ClientType>
+  <NavigationType>0</NavigationType>
+  <AppModuleComponents>
+    <AppModuleComponent type="1" schemaName="ovg_avisodegof" />
+    <AppModuleComponent type="1" schemaName="ovg_eventoparagof" />
+    <AppModuleComponent type="1" schemaName="ovg_oficinaparagof" />
+    <AppModuleComponent type="1" schemaName="systemuser" />
+    <AppModuleComponent type="26" id="{66f9e436-23ee-f011-8406-000d3a29c9a8}" />
+    <AppModuleComponent type="26" id="{00893109-527b-4ee2-8041-18a4069841ca}" />
+    <AppModuleComponent type="26" id="{3b3d4ebb-29e9-47a9-baa5-95ccfa16de3c}" />
+    <AppModuleComponent type="26" id="{11d691e5-f5b1-416f-b926-b83a4bf3a71c}" />
+    <AppModuleComponent type="26" id="{ba7ed933-281b-42af-a61c-c43597b24954}" />
+    <AppModuleComponent type="26" id="{6270ca25-af48-4a42-9611-d2f4a7748a08}" />
+    <AppModuleComponent type="60" id="{0eeb01ea-23ee-f011-8406-000d3a29c9a8}" />
+    <AppModuleComponent type="60" id="{be811b6a-5951-4c75-87ab-012873e8ed10}" />
+    <AppModuleComponent type="60" id="{c3e23321-f43c-420c-ae63-9750ea4d6811}" />
+    <AppModuleComponent type="60" id="{da729da2-484a-4adb-8d9b-bedff7c7480a}" />
+    <AppModuleComponent type="62" schemaName="ovg_GoOfiAdmin" />
+  </AppModuleComponents>
+  <AppModuleRoleMaps>
+    <Role id="{627090ff-40a3-4053-8790-584edc5be201}" />
+    <Role id="{f75552c3-b3c4-f111-aaaf-3833c5c1ce81}" />
+    <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+  </AppModuleRoleMaps>
+  <LocalizedNames>
+    <LocalizedName description="GoOfi - Admin" languagecode="3082" />
+  </LocalizedNames>
+  <appsettings>
+    <appsetting settingdefinitionid.uniquename="AppChannel">
+      <iscustomizable>1</iscustomizable>
+      <value>1</value>
+    </appsetting>
+  </appsettings>
+</AppModule>

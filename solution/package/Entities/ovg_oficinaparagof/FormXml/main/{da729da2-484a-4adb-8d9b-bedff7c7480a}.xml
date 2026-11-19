@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{da729da2-484a-4adb-8d9b-bedff7c7480a}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{b66003e2-9ccb-4f86-b348-5604e0b507fd}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="3082" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{24166512-30cd-4b94-87cf-b6f2c351faf1}">
+                  <labels>
+                    <label description="General" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{ae5a43bb-f6fd-4dc5-915b-8a1fd947b9c3}">
+                        <labels>
+                          <label description="Nombre" languagecode="3082" />
+                          <label description="Nombre" languagecode="1033" />
+                        </labels>
+                        <control id="ovg_nombre" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="ovg_nombre" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{15b1fd70-7501-4890-a368-3b45d7bc4e45}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Permite eventos" languagecode="3082" />
+                        </labels>
+                        <control id="ovg_permiteeventos" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="ovg_permiteeventos" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8b951948-98e6-48c0-9ea0-cd7180a8e9a1}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Id de chat de Teams para coordinar apertura de ofi" languagecode="3082" />
+                        </labels>
+                        <control id="ovg_idconversacionteams" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="ovg_idconversacionteams" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3682df89-fb5f-4fd2-b499-49a881c40a1d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Razón para el estado" languagecode="3082" />
+                          <label description="Status Reason" languagecode="1033" />
+                        </labels>
+                        <control id="statuscode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statuscode" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7f3dc0d1-55ae-44bd-8702-6cd876afbb92}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Estado" languagecode="3082" />
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="statecode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{dcb57a32-ce48-42b1-bbcc-a0555e1084f0}" visible="false">
+                        <labels>
+                          <label description="Propietario" languagecode="3082" />
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{28ac0793-0d30-48a0-aece-e6877f9493f7}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{c0b9ada3-7e1d-443c-840c-2109296dfa74}" showlabel="false">
+              <labels>
+                <label description="" languagecode="3082" />
+              </labels>
+            </cell>
+            <cell id="{c7f13578-8c25-412f-ae90-03d0044ec591}" showlabel="false">
+              <labels>
+                <label description="" languagecode="3082" />
+              </labels>
+            </cell>
+            <cell id="{c447e466-4391-4fa1-963d-079bbc1ca1d9}" showlabel="false">
+              <labels>
+                <label description="" languagecode="3082" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{22997a34-a8e7-4308-b011-6e5e2c70c36d}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{02c933ea-e4ab-4576-8506-fb66fa79e3de}" showlabel="false">
+              <labels>
+                <label description="" languagecode="3082" />
+              </labels>
+            </cell>
+            <cell id="{47cf1fa2-4d30-4a31-b909-c23f82fe97fa}" showlabel="false">
+              <labels>
+                <label description="" languagecode="3082" />
+              </labels>
+            </cell>
+            <cell id="{d1b45375-b057-4135-8c58-0fc5cc70c00b}" showlabel="false">
+              <labels>
+                <label description="" languagecode="3082" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Información" languagecode="3082" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Formulario para esta entidad." languagecode="3082" />
+    </Descriptions>
+  </systemform>
+</forms>

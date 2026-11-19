@@ -1,0 +1,244 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_office365": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ovg_GOF_Outlook"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "GOF_EmailNotificacionErrores (ovg_GOF_EmailNotificacionErrores)": {
+          "defaultValue": "{CORREOS SEPARADOS POR ;}",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ovg_GOF_EmailNotificacionErrores",
+            "description": "Destinatarios de las notificaciones de errores de los flujos de GoOfi. Indicar una o varias direcciones separadas por ;. Configurar el valor actual en cada entorno."
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "workflow": {
+                  "type": "string",
+                  "title": "Workflow",
+                  "description": "Metadatos de la ejecución que falla: string(workflow()).",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "workflow"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "jsonError": {
+          "runAfter": {},
+          "type": "ParseJson",
+          "inputs": {
+            "content": "@triggerBody()['workflow']",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "tags": {
+                  "type": "object",
+                  "properties": {
+                    "flowDisplayName": {
+                      "type": "string"
+                    },
+                    "environmentName": {
+                      "type": "string"
+                    },
+                    "logicAppName": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "flowDisplayName",
+                    "environmentName",
+                    "logicAppName"
+                  ]
+                },
+                "run": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                }
+              },
+              "required": [
+                "tags",
+                "run"
+              ]
+            }
+          }
+        },
+        "ValidarDestinatarios": {
+          "type": "ParseJson",
+          "inputs": {
+            "content": {
+              "destinatarios": "@trim(parameters('GOF_EmailNotificacionErrores (ovg_GOF_EmailNotificacionErrores)'))"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "destinatarios": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "destinatarios"
+              ]
+            }
+          },
+          "runAfter": {
+            "jsonError": [
+              "Succeeded"
+            ]
+          }
+        },
+        "urlRun": {
+          "runAfter": {
+            "ValidarDestinatarios": [
+              "Succeeded"
+            ]
+          },
+          "type": "Compose",
+          "inputs": "@concat('https://make.powerautomate.com/environments/',encodeUriComponent(body('jsonError')['tags']['environmentName']),'/flows/',encodeUriComponent(body('jsonError')['tags']['logicAppName']),'/runs/',encodeUriComponent(body('jsonError')['run']['name']))"
+        },
+        "EnviarCorreo": {
+          "runAfter": {
+            "urlRun": [
+              "Succeeded"
+            ]
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+              "connectionName": "shared_office365",
+              "operationId": "SendEmailV2"
+            },
+            "parameters": {
+              "emailMessage/To": "@body('ValidarDestinatarios')['destinatarios']",
+              "emailMessage/Subject": "GoOfi | Error de ejecución | @{body('jsonError')['tags']['flowDisplayName']} | @{body('jsonError')['tags']['environmentName']}",
+              "emailMessage/Body": "<p>Notificación automática de <strong>GoOfi</strong>.</p><p>El flujo <strong>@{replace(replace(replace(body('jsonError')['tags']['flowDisplayName'],'&','&amp;'),'<','&lt;'),'>','&gt;')}</strong> ha concluido una ejecución con error.</p><p><strong>Entorno:</strong> @{replace(replace(replace(body('jsonError')['tags']['environmentName'],'&','&amp;'),'<','&lt;'),'>','&gt;')}<br><strong>Ejecución:</strong> @{body('jsonError')['run']['name']}</p><p><a href=\"@{outputs('urlRun')}\">Ir a la ejecución con error</a></p>",
+              "emailMessage/Importance": "High"
+            }
+          }
+        },
+        "Responder": {
+          "runAfter": {
+            "EnviarCorreo": [
+              "Succeeded"
+            ]
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "statusCode": 200,
+            "body": {
+              "notificado": true
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "notificado": {
+                  "type": "boolean",
+                  "title": "Notificado"
+                }
+              }
+            }
+          }
+        },
+        "ScpErrorNotificacion": {
+          "type": "Scope",
+          "description": "Responde con error al padre y conserva el fallo si no se puede enviar la notificación.",
+          "runAfter": {
+            "EnviarCorreo": [
+              "Failed",
+              "TimedOut",
+              "Skipped"
+            ]
+          },
+          "actions": {
+            "ResponderError": {
+              "type": "Response",
+              "kind": "PowerApp",
+              "inputs": {
+                "statusCode": 500,
+                "body": {
+                  "notificado": false
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "notificado": {
+                      "type": "boolean",
+                      "title": "Notificado"
+                    }
+                  }
+                }
+              },
+              "runAfter": {}
+            },
+            "FinalizarErrorNotificacion": {
+              "type": "Terminate",
+              "inputs": {
+                "runStatus": "Failed",
+                "runError": {
+                  "code": "GOF_ErrorNotificacion",
+                  "message": "No se pudo enviar la notificación de errores de GoOfi. Revisa los metadatos de entrada, ovg_GOF_EmailNotificacionErrores y la conexión ovg_GOF_Outlook."
+                }
+              },
+              "runAfter": {
+                "ResponderError": [
+                  "Succeeded",
+                  "Failed",
+                  "TimedOut",
+                  "Skipped"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "outputs": {},
+      "description": "Envía una notificación HTML de errores de GoOfi al valor configurado en ovg_GOF_EmailNotificacionErrores. Recibe string(workflow()) del flujo padre."
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

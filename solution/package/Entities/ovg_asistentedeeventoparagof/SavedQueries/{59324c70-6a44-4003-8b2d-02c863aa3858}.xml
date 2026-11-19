@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{59324c70-6a44-4003-8b2d-02c863aa3858}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="ovg_identificador" select="1" icon="1" preview="1">
+        <row name="result" id="ovg_asistentedeeventoparagofid">
+          <cell name="ovg_evento" width="100" />
+          <cell name="ownerid" width="103" />
+          <cell name="modifiedon" width="167" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="ovg_asistentedeeventoparagof">
+          <attribute name="ovg_asistentedeeventoparagofid" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="ovg_evento" />
+          <attribute name="modifiedon" />
+          <attribute name="ownerid" />
+          <order attribute="ovg_evento" descending="false" />
+          <order attribute="ownerid" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Asistentes de evento para GOF activo" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

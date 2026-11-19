@@ -1,0 +1,451 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps-1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ovg_GOF_Dataverse"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Periodicidad": {
+          "recurrence": {
+            "frequency": "Hour",
+            "interval": 1,
+            "startTime": "2026-09-01T10:00:00Z"
+          },
+          "evaluatedRecurrence": {
+            "frequency": "Hour",
+            "interval": 1,
+            "startTime": "2026-09-01T10:00:00Z"
+          },
+          "metadata": {
+            "operationMetadataId": "9d0fc75d-6024-4471-bd45-7ae946e9717d"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "Redactar": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "1f6a79df-295d-41bf-beb1-f4881d3ff8fe"
+          },
+          "type": "Compose",
+          "inputs": "vLocalNow = obtener hora local\nsi Hora(vLocalNow) = 3"
+        },
+        "ScpPrincipal": {
+          "actions": {
+            "ScpFechas": {
+              "actions": {
+                "GetZonaHoraria": {
+                  "runAfter": {
+                    "horaValida": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "7e425d2e-31dd-4be9-a62d-5b34ace116f6"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "timezonedefinitions",
+                      "fetchXml": "<fetch>\n  <entity name='timezonedefinition'>\n    <attribute name='standardname' />\n    <link-entity name='usersettings' from='timezonecode' to='timezonecode' alias='u'>\n      <filter>\n        <condition attribute='systemuserid' operator='eq-userid' />\n      </filter>\n    </link-entity>\n  </entity>\n</fetch>",
+                      "x-ms-odata-metadata-full": false
+                    },
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps-1",
+                      "operationId": "ListRecords",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "zonaHoraria": {
+                  "runAfter": {
+                    "GetZonaHoraria": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "fefc6630-873d-488a-94f1-19debb7ca46c"
+                  },
+                  "type": "Compose",
+                  "inputs": "@outputs('GetZonaHoraria')?['body/value'][0]['standardname']"
+                },
+                "localToday": {
+                  "runAfter": {
+                    "localNow": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "bddeb78f-913d-4b70-af33-d33ebfca2605"
+                  },
+                  "type": "Compose",
+                  "inputs": "@convertFromUtc(\n    utcNow(),\n    outputs('zonaHoraria'),\n    'yyyy-MM-dd'\n)"
+                },
+                "horaValida": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "a8ab1385-bc92-4b45-bb39-a5d06df0d627"
+                  },
+                  "type": "Compose",
+                  "inputs": "@string('03')",
+                  "description": "a que hora se van a crear los avisos por reglas. a las 3 A.M. local del usuario de automatización.\nDe momento no veo critico parametrizar esto."
+                },
+                "localDayofweek": {
+                  "runAfter": {
+                    "localToday": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "ec3119ce-40bd-44e9-a079-2ca4a6273c02"
+                  },
+                  "type": "Compose",
+                  "inputs": "@dayOfWeek(\n  convertFromUtc(\n    utcNow(),\n    outputs('zonaHoraria'),\n    'yyyy-MM-dd'\n  )\n)"
+                },
+                "localNow": {
+                  "runAfter": {
+                    "zonaHoraria": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "8484c88c-6fc9-4b2b-af2e-4e7f49357495"
+                  },
+                  "type": "Compose",
+                  "inputs": "@convertFromUtc(\n    utcNow(),\n    outputs('zonaHoraria')\n)"
+                },
+                "fechasFuturas": {
+                  "runAfter": {
+                    "localDayofweek": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "9b3da5e3-2154-45a5-af51-2416d2db0516"
+                  },
+                  "type": "Compose",
+                  "inputs": "@createArray(\n  formatDateTime(\n    addDays(\n      outputs('localToday'), 1\n    ),'yyyy-MM-dd'\n  ), \n  formatDateTime(\n    addDays(\n      outputs('localToday'), 2\n    ),'yyyy-MM-dd'\n  ), \n  formatDateTime(\n    addDays(\n      outputs('localToday'), 3\n    ),'yyyy-MM-dd'\n  ), \n  formatDateTime(\n    addDays(\n      outputs('localToday'), 4\n    ),'yyyy-MM-dd'\n  ), \n  formatDateTime(\n    addDays(\n      outputs('localToday'), 5\n    ),'yyyy-MM-dd'\n  ), \n  formatDateTime(\n    addDays(\n      outputs('localToday'), 6\n    ),'yyyy-MM-dd'\n  ), \n  formatDateTime(\n    addDays(\n      outputs('localToday'), 7\n    ),'yyyy-MM-dd'\n  )\n)"
+                }
+              },
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "681da6f8-df60-4f05-9080-e6f95a1c0623"
+              },
+              "type": "Scope"
+            },
+            "ScpMain": {
+              "actions": {
+                "loopRules": {
+                  "foreach": "@outputs('GetRules')?['body/value']",
+                  "actions": {
+                    "loopFechasFuturas": {
+                      "foreach": "@array(outputs('fechasFuturas'))",
+                      "actions": {
+                        "si_fecha_i_esta_en_la_regla": {
+                          "actions": {
+                            "CheckExistAvisos": {
+                              "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "14a0b9f2-8168-4c67-8651-a0953662d3da"
+                              },
+                              "type": "OpenApiConnection",
+                              "inputs": {
+                                "parameters": {
+                                  "entityName": "ovg_avisodegofs",
+                                  "$select": "createdon",
+                                  "$filter": "_owninguser_value eq @{items('loopRules')['systemuserid']} and Microsoft.Dynamics.CRM.On(PropertyName='ovg_fecha',PropertyValue='@{items('loopFechasFuturas')}') and _ovg_oficina_value eq @{items('loopRules')['_ovg_oficinaparagof_value']}",
+                                  "$top": 1,
+                                  "x-ms-odata-metadata-full": false
+                                },
+                                "host": {
+                                  "connectionName": "shared_commondataserviceforapps-1",
+                                  "operationId": "ListRecords",
+                                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                },
+                                "authentication": "@parameters('$authentication')"
+                              },
+                              "runtimeConfiguration": {
+                                "paginationPolicy": {
+                                  "minimumItemCount": 5000
+                                }
+                              }
+                            },
+                            "ExisteAvisoPrevio": {
+                              "actions": {
+                                "CreateAviso": {
+                                  "runAfter": {},
+                                  "metadata": {
+                                    "operationMetadataId": "0b71c700-5f19-41d0-91f4-7cab6499cc49"
+                                  },
+                                  "type": "OpenApiConnection",
+                                  "inputs": {
+                                    "parameters": {
+                                      "entityName": "ovg_avisodegofs",
+                                      "item/ovg_fecha": "@items('loopFechasFuturas')",
+                                      "item/ovg_oficina@odata.bind": "ovg_oficinaparagofs(@{items('loopRules')['_ovg_oficinaparagof_value']})",
+                                      "item/ovg_creadomedianteregla": true,
+                                      "item/ownerid@odata.bind": "systemusers(@{items('loopRules')['systemuserid']})"
+                                    },
+                                    "host": {
+                                      "connectionName": "shared_commondataserviceforapps-1",
+                                      "operationId": "CreateRecord",
+                                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                    },
+                                    "authentication": "@parameters('$authentication')"
+                                  }
+                                }
+                              },
+                              "runAfter": {
+                                "CheckExistAvisos": [
+                                  "Succeeded"
+                                ]
+                              },
+                              "expression": {
+                                "and": [
+                                  {
+                                    "equals": [
+                                      "@length(\n  outputs('CheckExistAvisos')?['body/value']\n)",
+                                      0
+                                    ]
+                                  }
+                                ]
+                              },
+                              "metadata": {
+                                "operationMetadataId": "bc643fda-5480-4f15-be24-1a7145519f39"
+                              },
+                              "type": "If"
+                            }
+                          },
+                          "runAfter": {},
+                          "expression": {
+                            "and": [
+                              {
+                                "contains": [
+                                  "@array(outputs('diasRegla'))",
+                                  "@string(dayOfWeek(items('loopFechasFuturas')))"
+                                ]
+                              }
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "ad942970-bf99-409d-8316-d4c6c37b76ba"
+                          },
+                          "type": "If",
+                          "description": "se recorre las fechas futuras generadas a partir de la fecha actual, y por cada una se compara si coinciden sus dias de la semana con los días detectados en la regla actual"
+                        }
+                      },
+                      "runAfter": {
+                        "diasRegla": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "3f89bda7-be8d-4f16-86a1-79fa83339bd4"
+                      },
+                      "type": "Foreach",
+                      "runtimeConfiguration": {
+                        "concurrency": {
+                          "repetitions": 7
+                        }
+                      }
+                    },
+                    "diasRegla": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "8468b4a4-a029-4fbc-80a5-d9193b510876"
+                      },
+                      "type": "Compose",
+                      "inputs": "@split(\n   items('loopRules')['ovg_diasparaavisosautomaticosengof'],\n  ','\n)"
+                    }
+                  },
+                  "runAfter": {
+                    "GetRules": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "c7d047f8-9a4e-41d8-830e-5b5b075a5cb1"
+                  },
+                  "type": "Foreach",
+                  "runtimeConfiguration": {
+                    "concurrency": {
+                      "repetitions": 20
+                    }
+                  }
+                },
+                "GetRules": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "cb4f9a33-3701-4d21-ad53-f30c45362fdb"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "systemusers",
+                      "$select": "systemuserid,ovg_diasparaavisosautomaticosengof,_ovg_oficinaparagof_value",
+                      "$filter": "ovg_diasparaavisosautomaticosengof ne null and _ovg_oficinaparagof_value ne null and deletedstate eq 0 and isdisabled eq false",
+                      "x-ms-odata-metadata-full": false
+                    },
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps-1",
+                      "operationId": "ListRecords",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  },
+                  "runtimeConfiguration": {
+                    "paginationPolicy": {
+                      "minimumItemCount": 5000
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Si_no_corresponde_avanzar_": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "7d3ddd3f-0a80-4acb-bebb-88285f78ce46"
+              },
+              "type": "Scope"
+            },
+            "Si_no_corresponde_avanzar_": {
+              "actions": {
+                "Finalizar": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "853579a9-b6a4-477e-933d-261239cf7e0e"
+                  },
+                  "type": "Terminate",
+                  "inputs": {
+                    "runStatus": "Succeeded"
+                  }
+                }
+              },
+              "runAfter": {
+                "ScpFechas": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "or": [
+                  {
+                    "not": {
+                      "equals": [
+                        "@formatDateTime(outputs('localNow'),'HH')",
+                        "@outputs('horaValida')"
+                      ]
+                    }
+                  },
+                  {
+                    "equals": [
+                      "@outputs('localDayofweek')",
+                      6
+                    ]
+                  },
+                  {
+                    "equals": [
+                      "@outputs('localDayofweek')",
+                      0
+                    ]
+                  }
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b7cc0268-22e0-4143-932a-dafd22a3f898"
+              },
+              "type": "If",
+              "description": "Si \nla hora de ejecucion es distinto a 3 O\ndia local es sabado o domingo\n"
+            }
+          },
+          "runAfter": {
+            "Redactar": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d6321150-98fe-46ab-b484-1344cc8b6966"
+          },
+          "type": "Scope"
+        },
+        "ScpError": {
+          "actions": {
+            "NotificarError": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "59005224-3fbb-4026-ac61-a84680cddfeb"
+              },
+              "type": "Workflow",
+              "inputs": {
+                "host": {
+                  "workflowReferenceName": "45cf0f22-81de-f111-84ea-3833c5c1ce81"
+                },
+                "body": {
+                  "workflow": "@string(workflow())"
+                }
+              }
+            },
+            "FinalizarConError": {
+              "runAfter": {
+                "NotificarError": [
+                  "Succeeded",
+                  "Failed",
+                  "TimedOut",
+                  "Skipped"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "70a4dc66-46d9-4b4e-9d62-f7e81d09fc7c"
+              },
+              "type": "Terminate",
+              "inputs": {
+                "runStatus": "Failed",
+                "runError": {
+                  "code": "GOF_ErrorFlujo",
+                  "message": "La lógica principal de GoOfi ha fallado. Consulta ScpPrincipal para el error original y ScpError para el resultado de la notificación."
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "ScpPrincipal": [
+              "Failed",
+              "TimedOut",
+              "Skipped"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "8d613a66-ae01-41d5-8c1b-a8169cb10152"
+          },
+          "type": "Scope",
+          "description": "Notifica los fallos de GoOfi y conserva el estado fallido aunque la notificación también falle."
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

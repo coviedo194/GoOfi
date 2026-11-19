@@ -1,0 +1,87 @@
+/**
+ * Estilos para MiniCalendar
+ * Popover con un mini calendario mensual. Mantiene coherencia con el resto
+ * de la app (paleta azul Fluent UI, esquinas redondeadas, tipología estándar).
+ */
+
+.week-range-trigger {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.week-range-trigger:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.week-range-trigger-label {
+  margin-left: 0.5rem;
+}
+
+.mini-calendar-surface {
+  padding: 0.75rem;
+  min-width: 280px;
+}
+
+.mini-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.mini-calendar-title {
+  flex: 1;
+  text-align: center;
+  color: var(--colorNeutralForeground1);
+}
+
+.mini-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.mini-calendar-weekday {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--colorNeutralForeground2);
+  padding: 0.25rem 0;
+}
+
+.mini-calendar-day {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 0.4rem 0;
+  font-size: 13px;
+  color: var(--colorNeutralForeground1);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.mini-calendar-day:hover {
+  background: var(--colorBrandBackground2);
+  border-color: var(--colorBrandStroke1);
+}
+
+.mini-calendar-day-out {
+  color: var(--colorNeutralForeground4);
+}
+
+.mini-calendar-day-today {
+  border-color: var(--colorBrandStroke1);
+  font-weight: 600;
+}
+
+.mini-calendar-footer {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--colorNeutralStroke2);
+  padding-top: 0.5rem;
+}

@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="ovg_GOF_EmailNotificacionErrores">
+  <description default="Destinatarios de las notificaciones de errores de los flujos de GoOfi. Indicar una o varias direcciones separadas por ;. Configurar el valor actual en cada entorno.">
+    <label description="Destinatarios de las notificaciones de errores de los flujos de GoOfi. Indicar una o varias direcciones separadas por ;. Configurar el valor actual en cada entorno." languagecode="3082" />
+  </description>
+  <displayname default="GOF_EmailNotificacionErrores">
+    <label description="GOF_EmailNotificacionErrores" languagecode="3082" />
+  </displayname>
+  <introducedversion>1.0.0.15</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>1</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

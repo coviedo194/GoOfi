@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{6270ca25-af48-4a42-9611-d2f4a7748a08}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="ovg_asunto" select="1" icon="1" preview="1">
+        <row name="result" id="ovg_eventoparagofid">
+          <cell name="ovg_asunto" width="300" />
+          <cell name="ovg_fecha" width="138" />
+          <cell name="ovg_oficina" width="169" />
+          <cell name="createdby" width="177" />
+          <cell name="createdon" width="153" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="ovg_eventoparagof">
+          <attribute name="ovg_eventoparagofid" />
+          <attribute name="ovg_asunto" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <attribute name="ovg_fecha" />
+          <attribute name="ovg_oficina" />
+          <attribute name="createdby" />
+          <order attribute="ovg_fecha" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Eventos para GOF - Inactivos" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

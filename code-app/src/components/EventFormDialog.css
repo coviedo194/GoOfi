@@ -1,0 +1,29 @@
+/**
+ * Estilos para EventFormDialog
+ * Formulario de creación/edición de eventos, alineado con el estilo Fluent UI
+ * de la app (paleta azul, esquinas redondeadas, espacios consistentes).
+ */
+
+.event-form-surface {
+  max-width: 540px;
+  width: 100%;
+}
+
+.event-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.event-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 540px) {
+  .event-form-row {
+    grid-template-columns: 1fr;
+  }
+}

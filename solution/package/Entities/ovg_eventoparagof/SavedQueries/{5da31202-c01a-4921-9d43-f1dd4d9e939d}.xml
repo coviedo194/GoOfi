@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{5da31202-c01a-4921-9d43-f1dd4d9e939d}</savedqueryid>
+    <layoutxml>
+      <grid name="ovg_eventoparagofs" jump="ovg_asunto" select="1" icon="1" preview="1">
+        <row name="ovg_eventoparagof" id="ovg_eventoparagofid">
+          <cell name="ovg_asunto" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>2</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="ovg_eventoparagof">
+          <attribute name="ovg_eventoparagofid" />
+          <attribute name="ovg_asunto" />
+          <attribute name="createdon" />
+          <order attribute="ovg_asunto" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Vista asociada de Evento para GOF" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

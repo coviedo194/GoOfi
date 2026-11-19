@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityRelationships xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EntityRelationship Name="business_unit_ovg_asistentedeeventoparagof" />
+  <EntityRelationship Name="business_unit_ovg_avisodegof" />
+  <EntityRelationship Name="business_unit_ovg_eventoparagof" />
+  <EntityRelationship Name="business_unit_ovg_oficinaparagof" />
+  <EntityRelationship Name="lk_ovg_asistentedeeventoparagof_createdby" />
+  <EntityRelationship Name="lk_ovg_asistentedeeventoparagof_modifiedby" />
+  <EntityRelationship Name="lk_ovg_avisodegof_createdby" />
+  <EntityRelationship Name="lk_ovg_avisodegof_modifiedby" />
+  <EntityRelationship Name="lk_ovg_eventoparagof_createdby" />
+  <EntityRelationship Name="lk_ovg_eventoparagof_modifiedby" />
+  <EntityRelationship Name="lk_ovg_oficinaparagof_createdby" />
+  <EntityRelationship Name="lk_ovg_oficinaparagof_modifiedby" />
+  <EntityRelationship Name="ovg_asistentedeeventoparagof_evento_ovg_eventoparagof" />
+  <EntityRelationship Name="ovg_avisodegof_oficina_oficinaparagof" />
+  <EntityRelationship Name="ovg_eventoparagof_oficina_ovg_oficinaparagof" />
+  <EntityRelationship Name="ovg_systemuser_oficinaparagof_ovg_oficinaparagof" />
+  <EntityRelationship Name="owner_ovg_asistentedeeventoparagof" />
+  <EntityRelationship Name="owner_ovg_avisodegof" />
+  <EntityRelationship Name="owner_ovg_eventoparagof" />
+  <EntityRelationship Name="owner_ovg_oficinaparagof" />
+  <EntityRelationship Name="team_ovg_asistentedeeventoparagof" />
+  <EntityRelationship Name="team_ovg_avisodegof" />
+  <EntityRelationship Name="team_ovg_eventoparagof" />
+  <EntityRelationship Name="team_ovg_oficinaparagof" />
+  <EntityRelationship Name="user_ovg_asistentedeeventoparagof" />
+  <EntityRelationship Name="user_ovg_avisodegof" />
+  <EntityRelationship Name="user_ovg_eventoparagof" />
+  <EntityRelationship Name="user_ovg_oficinaparagof" />
+</EntityRelationships>

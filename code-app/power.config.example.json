@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "appId": "",
+  "appDisplayName": "GoOfi",
+  "region": "prod",
+  "appType": "CodeApp",
+  "environmentId": "<ID-DE-TU-ENTORNO>",
+  "description": " ",
+  "buildPath": "./dist",
+  "buildEntryPoint": "index.html",
+  "localAppUrl": "http://localhost:3000",
+  "logoPath": "Default",
+  "connectionReferences": {},
+  "databaseReferences": {
+    "default.cds": {
+      "dataSources": {
+        "oficinasparagof": {
+          "entitySetName": "ovg_oficinaparagofs",
+          "logicalName": "ovg_oficinaparagof",
+          "isHidden": false
+        },
+        "avisosdegof": {
+          "entitySetName": "ovg_avisodegofs",
+          "logicalName": "ovg_avisodegof",
+          "isHidden": false
+        },
+        "eventosparagof": {
+          "entitySetName": "ovg_eventoparagofs",
+          "logicalName": "ovg_eventoparagof",
+          "isHidden": false
+        },
+        "asistentesdeeventoparagof": {
+          "entitySetName": "ovg_asistentedeeventoparagofs",
+          "logicalName": "ovg_asistentedeeventoparagof",
+          "isHidden": false
+        },
+        "environment_39a902ba": {
+          "entitySetName": "Environment",
+          "logicalName": "environment_39a902ba",
+          "isHidden": false
+        },
+        "usuarios": {
+          "entitySetName": "systemusers",
+          "logicalName": "systemuser",
+          "isHidden": false
+        }
+      },
+      "environmentVariableName": ""
+    }
+  }
+}
